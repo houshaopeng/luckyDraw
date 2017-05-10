@@ -45,8 +45,7 @@ import Loginbox from "./_components/Loginbox.vue"
 		name: "Sljr",
 		data(){
 			return {
-				lotteryPage: true,  // todo
-
+				lotteryPage: false,  // todo
 
 				userName:"未登录",
 			}

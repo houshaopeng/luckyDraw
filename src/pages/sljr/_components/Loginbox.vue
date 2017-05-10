@@ -2,14 +2,11 @@
 	<div id="telnumber">
 		<span id="bg"></span>
 		<div id="input_padding">
-			<!-- <validator name="validation"> -->  <!--  todo  ???? -->
 				<div class="l_number">
-				<!-- <validator name="validation"> -->
 					<ul>
 						<li><img src="~ASSET/img/sljr/l_tel_33.png" alt="" /></li>
 						<li>|</li>
-						<!-- <li><input type="text" placeholder="请输入手机号码" id="num" maxlength="11" v-model= "telPhone" /></li> -->
-						<li><input type="number" placeholder="请输入手机号码" id="telPhone" v-model= "telPhone" v-validate:telPhone="{ minlength: 11, maxlength: 11 }"/></li>
+						<li><input type="number" placeholder="请输入手机号码" id="num" v-model= "telPhone"/></li>
 						<li><input type="button" value="获取验证码" id="getOtp" @click= "getOtp"/></li>
 					</ul>
 				</div>
@@ -17,21 +14,18 @@
 					<ul>
 						<li><img src="~ASSET/img/sljr/l_te_36.png" alt="" /></li>
 						<li>|</li>
-						<li><input type="number" placeholder="请输入验证码" id="otp" maxlength="6" v-model = "VerificationCode"/></li>
+						<li><input type="number" placeholder="请输入验证码" id="otp" v-model = "VerificationCode"/></li>
 					</ul>
 				</div>
 				<!-- <span id="yz_error" v-show= "errorTitle">
 					* 验证码错误
 				</span> -->
 				<button id="sure" @click = "sureLogin"></button>
-			<!-- </validator> -->
 		</div>
 	</div>
 </template>
 <script>
-import validator from 'VENDOR/js/validation.js'
 import { Toast } from 'mint-ui';
-import 'mint-ui/lib/style.css';
 import Bus from "VENDOR/js/bus.js"    
 	export default{
 		name: "Loginbox",
@@ -47,14 +41,9 @@ import Bus from "VENDOR/js/bus.js"
 		methods:{
 			// 获取验证码
 			getOtp(){
-				console.log(this.$http);
-				var rule = /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\d{8}$/i;
-				if(!rule.test(this.telPhone)) {
-				    Toast("请输入正确的手机号");
-				}else{
-					// todo common error issue
+				if(this.testTelPhone()){
 					this.$http.post(
-						"http://yibingtao-test.shanlin.com:8083/login/sendLoginotp", 
+						"/api/login/sendLoginotp", 
 						{
 							"mobileNo":this.telPhone,
 						},
@@ -64,7 +53,11 @@ import Bus from "VENDOR/js/bus.js"
 							}
 						}
 					).then(function(response){
-						this.UUID = response.data.otpInfo.otpUUID;      //获取uuid
+						if(response.data.code == "000000"){
+							this.UUID = response.data.otpInfo.otpUUID;      //获取uuid
+						}else {
+							Toast("网络数据错误")
+						}
 					},function(response){
 						Toast("网络请求失败")
 					})
@@ -76,7 +69,6 @@ import Bus from "VENDOR/js/bus.js"
 				if(!rule.test(this.telPhone)) {
 				    Toast("请输入正确的手机号");
 				}else{
-
 					this.$http.post(
 						"http://yibingtao-test.shanlin.com:8083/login/checkOptverify", 
 						{
@@ -97,33 +89,39 @@ import Bus from "VENDOR/js/bus.js"
 							this.childSwitchPage.loginPage=false;
 						}else{
 							Toast('验证码错误');
-							this.errorTitle = true;
+							// this.errorTitle = true;
 						}
 					},function(){
 						Toast('网络请求错误');
 					})
 				}	
+			},
+			testTelPhone(){
+				var rule = /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\d{8}$/i;
+				if(!rule.test(this.telPhone)) {
+				    Toast("请输入正确的手机号");
+				}else {
+					return true;
+				}
 			}
 		},
 		computed: {
 			
 		},
+		filters: {
+
+		},
 		watch: {
-			tel_phone: function(){
-				if(this.tel_phone.length==1){
-					return this.tel_phone=this.tel_phone.replace(/[^1-9]/g,'')
-				}else if(this.tel_phone.length==11){
-					// Toast('请输入正确的手机号');
-					return this.tel_phone=this.tel_phone.replace(/\D/g,'')
-				}else{
-					return this.tel_phone=this.tel_phone.replace(/\D/g,'')
+			telPhone: function(){
+				if (this.telPhone.length==11 && !/^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\d{8}$/i.test(this.telPhone)){
+					Toast('请输入正确的手机号');
+				}else if (this.telPhone.length>=11){
+					this.telPhone = this.telPhone.substring(0,11);
 				}
 			},
 			VerificationCode : function(){
-				if(this.VerificationCode.length==1){
-					return this.VerificationCode=this.VerificationCode.replace(/[^1-9]/g,'')
-				}else{
-					return this.VerificationCode=this.VerificationCode.replace(/\D/g,'')
+				if(this.VerificationCode.length>=6){
+					this.VerificationCode = this.VerificationCode.substring(0,6);
 				}
 			},
 		},
