@@ -43,7 +43,7 @@ import Bus from "VENDOR/js/bus.js"
 			getOtp(){
 				if(this.testTelPhone()){
 					this.$http.post(
-						"/api/login/sendLoginotp",
+						"http://120.27.220.25:8083/login/sendLoginotp",
 						{
 							"mobileNo":this.telPhone,
 						},
