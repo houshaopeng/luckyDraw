@@ -2,12 +2,12 @@
 * @Author: Marte
 * @Date:   2017-05-17 15:45:56
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-05-17 15:46:28
+* @Last Modified time: 2017-05-17 16:19:13
 */
 
 'use strict';
 /*截取url数据*/
-function GetRequest(key) {
+export function GetRequest(key) {
     var url = location.search; //获取url中"?"符后的字串
     var theRequest = new Object();
     var strs = [];

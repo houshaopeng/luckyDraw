@@ -82,7 +82,7 @@
     // import Rule from "./_components/Rule.vue"
     import Loginbox from "./_components/Loginbox.vue"
     import wxshare from "VENDOR/js/wxshare.js"
-    import util from "VENDOR/js/util.js"
+    import {GetRequest} from "VENDOR/js/util.js"
     export default{
         data(){
             return{
