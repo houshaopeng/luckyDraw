@@ -82,6 +82,7 @@
     // import Rule from "./_components/Rule.vue"
     import Loginbox from "./_components/Loginbox.vue"
     import wxshare from "VENDOR/js/wxshare.js"
+    import util from "VENDOR/js/util.js"
     export default{
         data(){
             return{
@@ -195,6 +196,8 @@
             }
         },
         mounted (){
+            localStorage.usertoken = GetRequest('userToken');
+            localStorage.gameId = GetRequest('gameId');
 
             var __config = {
                 'RequestSignUrl':'http://120.27.220.25:8083/weiXin/getSign',
@@ -229,7 +232,7 @@
 
                         }
                         var param = {
-                            'shareUrl': "http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1000",
+                            'shareUrl': "http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1001",
                             'userToken': localStorage.usertoken,
                             'shareType': type
                         }
@@ -250,10 +253,10 @@
                         })
                     }
                 },
-                'title':'转盘抽奖啦',
+                'title':'老虎机抽奖啦',
                 'desc':'关注微信号，踊跃抽奖，最高可得50000元理财金',
-                'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1000" + "&userToken=" + localStorage.usertoken,
-                'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
+                'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1001" + "&userToken=" + localStorage.usertoken,
+                'imgUrl':"http://shanlingame.oneforce.cn/laohuji/static/img/laohuji.png",//todo
             }
             wxshare(__config);
         },
