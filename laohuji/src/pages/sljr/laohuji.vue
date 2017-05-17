@@ -103,6 +103,7 @@
             }
         },
         methods:{
+
             start(){
                 this.start1=false;
                 this.started=true;
@@ -198,7 +199,6 @@
         mounted (){
             localStorage.usertoken = GetRequest('userToken');
             localStorage.gameId = GetRequest('gameId');
-
             var __config = {
                 'RequestSignUrl':'http://120.27.220.25:8083/weiXin/getSign',
                 'RequestSignParam':{                   //验证签名接口的参数
@@ -258,6 +258,7 @@
                 'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1001" + "&userToken=" + localStorage.usertoken,
                 'imgUrl':"http://shanlingame.oneforce.cn/laohuji/static/img/laohuji.png",//todo
             }
+            console.log(__config)
             wxshare(__config);
         },
         components:{
