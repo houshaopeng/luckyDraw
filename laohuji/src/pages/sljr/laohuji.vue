@@ -3,7 +3,7 @@
         <!-- 登录页 -->
         <div id="login" v-show="loginshow">
             <Login :userName = "userName"></Login>
-            <Loginbox></Loginbox>
+            <Loginbox @newNodeEvent="parentLisen"></Loginbox>
         </div>
         <!-- 中奖记录页 -->
         <div id="winning_record" v-show="jilu">
@@ -189,6 +189,9 @@
             gozjjl(){
                 this.jilu=true;
                 this.laohujishow=false;
+            },
+            parentLisen(loginshow){
+                alert(loginshow)
             }
         },
         mounted (){

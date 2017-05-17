@@ -1,14 +1,14 @@
 export default[
 // 善林金融抽奖页面
 {
-	path:'/sljractivite',
-	name:'sljractivite',
+	path:'/laohuji',
+	name:'laohuji',
 	meta:{
 		title:'善林金融抽奖'
 	},
-	component:resolve=> require(['PAGE/sljr/SljrActivite.vue'],resolve)
+	component:resolve=> require(['PAGE/sljr/laohuji.vue'],resolve)
 },
 {
-	path:'*', redirect:'/sljractivite'
+	path:'*', redirect:'/laohuji'
 },
 ]

@@ -5,7 +5,7 @@ import VueResource from 'vue-resource'
 // import $ from 'jquery'
 //import _ from 'lodash'
 import routes from 'ROUTE/app-router'
-   
+
 import VeeValidate from 'vee-validate';    // 表单验证插件
 
 var FastClick = require('fastclick');
@@ -17,7 +17,7 @@ Vue.use(VueResource)
 
 
 
-const router = new VueRouter({ //路由配置  
+const router = new VueRouter({ //路由配置
   mode: (process.env.NODE_ENV == 'local') ? "hash" : "history",
   base: '/',
   linkActiveClass: 'active',

@@ -89,6 +89,7 @@ import Bus from "VENDOR/js/bus.js"
 						console.log(response);
 						if(response.data.code=="000000"){
 							Bus.$emit('moveTelPhone', this.telPhone);
+							this.$emit('newNodeEvent', '我是子元素传过来的')
 							this.loginshow=false;
 							this.jilu=true;
 						}else{
