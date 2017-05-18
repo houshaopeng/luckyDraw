@@ -46,7 +46,7 @@
                     <p>3.每位用户每天抽奖次数上限为5次。</p>
                     <p>4.三个福袋的奖品为5000元理财金，三个红包的奖品为10000元理财金，三个金币奖品为20000元理财金。</p>
                     <p>5.理财红包有效期为15日，请尽快登录善林金融APP使用，超出时间自动失效。</p>
-                    <p>6.活动最终解释权归善林金融所有。</p>
+                    <p @click="resetLocal">6.活动最终解释权归善林金融所有。</p>
             </div>
             </div>
             <!-- 中奖弹出层 -->
@@ -67,7 +67,7 @@
                 </div>
                 <div class="content">
                     <div class="tip">
-                        <span>呀，没有抽奖机会了</span>
+                        <span>很遗憾，没有中奖！</span>
                         <p>分享给好友赢取更多机会吧!</p>
                     </div>
                 </div>
@@ -105,8 +105,12 @@
         methods:{
 
             start(){
-                this.start1=false;
+                this.start1=false;//按钮切换
                 this.started=true;
+                --localStorage.times;
+                if(localStorage.times<0){
+                    alert("您当日抽奖次数已用完")
+                }else{
                 /*===================================================*/
                 var flag=false;
                 var index=5;
@@ -172,6 +176,7 @@
                     },2000);
                     index--;
                 }
+                }
             },
             end(){
                 this.start1=true;
@@ -189,16 +194,30 @@
                 this.drawn=false;
             },
             gozjjl(){
-                this.jilu=true;
-                this.laohujishow=false;
+                if(localStorage.usertoken){
+                    this.jilu=true;
+                    this.laohujishow=false;
+                }else{
+                    alert("您还没有中奖记录")
+                }
             },
             parentLisen(loginshow){
                 alert(loginshow)
+            },
+            /*调试用，清本地数据*/
+            resetLocal(){
+                localStorage.clear();
+                window.location.reload();
             }
         },
         mounted (){
-            localStorage.usertoken = GetRequest('userToken');
-            localStorage.gameId = GetRequest('gameId');
+            localStorage.times=5;//当日抽奖次数
+            if(localStorage.usertoken=='undefined'){
+                localStorage.usertoken = GetRequest('userToken');
+                localStorage.gameId = GetRequest('gameId');
+                localStorage.nickname = GetRequest('nickname');
+            }
+            this.userName = localStorage.nickname;
             var __config = {
                 'RequestSignUrl':'http://120.27.220.25:8083/weiXin/getSign',
                 'RequestSignParam':{                   //验证签名接口的参数
