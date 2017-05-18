@@ -273,10 +273,11 @@
         },
         mounted (){
             localStorage.times=5;//当日抽奖次数
-            if(localStorage.usertoken==undefined){
+            if(localStorage.usertoken=='undefined'){
                 localStorage.usertoken = GetRequest('userToken');
                 localStorage.gameId = GetRequest('gameId');
                 localStorage.nickname = GetRequest('nickname');
+                conosle.log(local.usertoken)
             }
             this.userName = localStorage.nickname;
             var __config = {
