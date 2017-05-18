@@ -135,9 +135,9 @@
                     num2=[-33,-103,-173,-243][TextNum2];
                     num3=[-33,-103,-173,-243][TextNum3];
 
-                    num1=[-103,-103,-103,-103][TextNum1];//在这里随机
-                    num2=[-103,-103,-103,-103][TextNum2];
-                    num3=[-103,-103,-103,-103][TextNum3];
+                    // num1=[-103,-103,-103,-103][TextNum1];//在这里随机
+                    // num2=[-103,-103,-103,-103][TextNum2];
+                    // num3=[-103,-103,-103,-103][TextNum3];
 
                     // $(".img1").css("top",0).animate({"top":num1},800,"linear");
                     // $(".img2").css("top",0).animate({"top":num2},1100,"linear");
@@ -229,16 +229,16 @@
             },
             login(){
 
-                    // this.laohujishow=false;
-                    // this.loginshow=true;
-                    // this.drawn=false;
-                if(this.userName!==undefined){
-                    alert("您已经登录")
-                }else{
                     this.laohujishow=false;
                     this.loginshow=true;
                     this.drawn=false;
-                }
+                // if(this.userName!==undefined){
+                //     alert("您已经登录")
+                // }else{
+                //     this.laohujishow=false;
+                //     this.loginshow=true;
+                //     this.drawn=false;
+                // }
 
             },
             gozjjl(){
