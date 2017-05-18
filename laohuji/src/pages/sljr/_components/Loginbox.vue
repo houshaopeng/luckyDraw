@@ -1,5 +1,5 @@
 <template>
-	<div id="telnumber">
+	<div id="telnumber" v-show="loginShow">
 		<span id="bg"></span>
 		<div id="input_padding">
 				<div class="l_number">
@@ -36,6 +36,9 @@ import Bus from "VENDOR/js/bus.js"
 				VerificationCode : "",  // 验证码
 				//errorTitle : false,      错误信息不提示显示
 				UUID: "",               // 从/login/sendLoginotp获取 uuid
+				loginShow:true,   //显示本登录页
+				winningShow:true  //显示中奖纪录页
+
 			}
 		},
 		methods:{
@@ -69,7 +72,7 @@ import Bus from "VENDOR/js/bus.js"
 			// 确认登录
 			sureLogin(){
 				var rule = /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\d{8}$/i;
-				alert(this.UUID);
+				// alert(this.UUID);
 				if(!rule.test(this.telPhone)) {
 				    Toast("请输入正确的手机号");
 				}else{
@@ -86,12 +89,10 @@ import Bus from "VENDOR/js/bus.js"
 							}
 						}
 					).then(function(response){
-						console.log(response);
 						if(response.data.code=="000000"){
 							Bus.$emit('moveTelPhone', this.telPhone);
-							this.$emit('newNodeEvent', '我是子元素传过来的')
-							this.loginshow=false;
-							this.jilu=true;
+							Bus.$emit('newNodeEvent', this.winningShow);
+							this.loginShow=false;
 						}else{
 							Toast('验证码错误');
 							// this.errorTitle = true;

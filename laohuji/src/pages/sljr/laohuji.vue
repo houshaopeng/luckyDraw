@@ -2,11 +2,16 @@
     <div id="sljr">
         <!-- 登录页 -->
         <div id="login" v-show="loginshow">
-            <Login :userName = "userName"></Login>
+            <p class="title" >
+                <span class="login" @click="login">欢迎您，{{userName}}</span>
+            </p>
             <Loginbox @newNodeEvent="parentLisen"></Loginbox>
         </div>
         <!-- 中奖记录页 -->
         <div id="winning_record" v-show="jilu">
+            <p class="title" >
+                <span class="login" @click="backhome">&lt;返回抽奖页</span>
+            </p>
             <div id="container">
                 <div id="zhongjiang_list">
                     <div id="zhongjiang_title">
@@ -14,7 +19,7 @@
                         <div>获得奖品</div>
                     </div>
                     <ul id="item">
-
+                        <li v-for="item in items"><span>{{item[0]}}</span><span>{{item[1]}}</span></li>
                     </ul>
                     <div id="see_more">查看更多记录</div>
                 </div>
@@ -22,7 +27,7 @@
         </div>
         <!-- 老虎机抽奖页 -->
         <div id="laohujipage" v-show="laohujishow">
-             <p class="title">
+            <p class="title" >
                 <span class="login" @click="login">欢迎您，{{userName}}</span>
                 <span class="winning_record"@click="gozjjl"></span>
             </p>
@@ -83,6 +88,8 @@
     import Loginbox from "./_components/Loginbox.vue"
     import wxshare from "VENDOR/js/wxshare.js"
     import {GetRequest} from "VENDOR/js/util.js"
+    import {getNowFormatDate} from "VENDOR/js/util1.js"
+    import Bus from "VENDOR/js/bus.js"
     export default{
         data(){
             return{
@@ -99,7 +106,8 @@
                 laohujishow:true,
                 loginshow:false,
                 jilu:false,
-                userName:"请登录"
+                userName:"",
+                items:'',
             }
         },
         methods:{
@@ -127,9 +135,9 @@
                     num2=[-33,-103,-173,-243][TextNum2];
                     num3=[-33,-103,-173,-243][TextNum3];
 
-                    // num1=[-103,-103,-103,-103][TextNum1];//在这里随机
-                    // num2=[-103,-103,-103,-103][TextNum2];
-                    // num3=[-103,-103,-103,-103][TextNum3];
+                    num1=[-103,-103,-103,-103][TextNum1];//在这里随机
+                    num2=[-103,-103,-103,-103][TextNum2];
+                    num3=[-103,-103,-103,-103][TextNum3];
 
                     // $(".img1").css("top",0).animate({"top":num1},800,"linear");
                     // $(".img2").css("top",0).animate({"top":num2},1100,"linear");
@@ -164,15 +172,46 @@
                         if(num1==num2&&num2==num3&&num3==-33){
                             this.drawn=true;
                             this.span=this.drawntext.a;//三个金币20000元理财金
+                            /*保存奖品*/
+                            var getTime = getNowFormatDate();//抽奖时间
+                            var goods=this.drawntext.a+"元理财金";
+                            if (!localStorage.prize) {
+                                localStorage.prize = JSON.stringify([[getTime, goods]]);
+                            } else {
+                                var arrNew = JSON.parse(localStorage.prize);
+                                arrNew.push([getTime, goods]);
+                                localStorage.prize = JSON.stringify(arrNew);
+                            }
                         }else if(num1==num2&&num2==num3&&num3==-103){
                             this.drawn=true;
                             this.span=this.drawntext.b;//三个福袋10000元理财金
+
+
+                            var getTime = getNowFormatDate();//抽奖时间
+                            var goods=this.drawntext.a+"元理财金";
+                            if (!localStorage.prize) {
+                                localStorage.prize = JSON.stringify([[getTime, goods]]);
+                            } else {
+                                var arrNew = JSON.parse(localStorage.prize);
+                                arrNew.push([getTime, goods]);
+                                localStorage.prize = JSON.stringify(arrNew);
+                            }
                         }else if(num1==num2&&num2==num3&&num3==-173){
                             this.drawn=true;
                             this.span=this.drawntext.c;//三个红包5000元理财金
+                            var getTime = getNowFormatDate();//抽奖时间
+                            var goods=this.drawntext.a+"元理财金";
+                            if (!localStorage.prize) {
+                                localStorage.prize = JSON.stringify([[getTime, goods]]);
+                            } else {
+                                var arrNew = JSON.parse(localStorage.prize);
+                                arrNew.push([getTime, goods]);
+                                localStorage.prize = JSON.stringify(arrNew);
+                            }
                         }else{
                             this.notwinning=true;
                         }
+                        this.items=JSON.parse(localStorage.prize);
                     },2000);
                     index--;
                 }
@@ -189,16 +228,25 @@
                 this.drawn=false;
             },
             login(){
-                this.laohujishow=false;
-                this.loginshow=true;
-                this.drawn=false;
+
+                    // this.laohujishow=false;
+                    // this.loginshow=true;
+                    // this.drawn=false;
+                if(this.userName!==undefined){
+                    alert("您已经登录")
+                }else{
+                    this.laohujishow=false;
+                    this.loginshow=true;
+                    this.drawn=false;
+                }
+
             },
             gozjjl(){
                 if(localStorage.usertoken){
                     this.jilu=true;
                     this.laohujishow=false;
                 }else{
-                    alert("您还没有中奖记录")
+                    alert("您还没有中奖记录,请登录")
                 }
             },
             parentLisen(loginshow){
@@ -208,11 +256,24 @@
             resetLocal(){
                 localStorage.clear();
                 window.location.reload();
+            },
+            backhome(){
+                this.jilu=false;
+                this.laohujishow=true;
             }
+        },
+        created() {
+            Bus.$on('moveTelPhone', a=> {
+                this.userName = a;
+            });
+            Bus.$on('newNodeEvent', b=> {
+                this.jilu = b;
+                this.loginshow=false;
+            });
         },
         mounted (){
             localStorage.times=5;//当日抽奖次数
-            if(localStorage.usertoken=='undefined'){
+            if(localStorage.usertoken==undefined){
                 localStorage.usertoken = GetRequest('userToken');
                 localStorage.gameId = GetRequest('gameId');
                 localStorage.nickname = GetRequest('nickname');
@@ -308,8 +369,8 @@
                 font-size:pxTorem(12px);
                 color:#fff;
                 background:url("~ASSET/img/laohujiImg/请登录.png")no-repeat left;
-                background-size:108px 22px;
-                width: 108px;
+                background-size:147px 22px;
+                width: 137px;
                 height: 22px;
                 line-height: 22px;
                 padding-left:12px;
@@ -504,10 +565,19 @@
             background-size: 330px 420px;
             margin: 100px auto 0;
             position: relative;
-        }
-
-        #zhongjiang_title {
-            border-bottom: 1px solid #eeeeee;
+            #item {
+                position:absolute;
+                top: 120px;
+                text-align: center;
+                li{
+                    width: 330px;
+                    height: 30px;
+                    line-height: 30px;
+                    span{
+                        padding: 20px;
+                    }
+                }
+            }
         }
 
         #zhongjiang_title div {
