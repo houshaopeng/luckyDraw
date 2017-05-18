@@ -277,7 +277,6 @@
                 localStorage.usertoken = GetRequest('userToken');
                 localStorage.gameId = GetRequest('gameId');
                 localStorage.nickname = GetRequest('nickname');
-                conosle.log(local.usertoken)
             }
             this.userName = localStorage.nickname;
             var __config = {
