@@ -33,9 +33,9 @@
       //调用摄像头,本地相册
       getPhoto:function(){
         alert(1);
-        alert($route);
-        alert($route.params);
-        alert($route.params.joinId);
+        alert(this.$route);
+        alert(this.$route.params);
+        alert(this.$route.params.joinId);
         Vue.prototype.$getPhoto();
       },
     },
