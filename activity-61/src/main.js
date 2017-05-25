@@ -160,34 +160,46 @@ window.onload = function(){
 /*提供一个全局方法，用来开启摄像头*/
 Vue.prototype.$getPhoto = function(){
     alert("调用摄像头开始")
+    wx.error(function(res){
+       alert(res);
+       alert(JSON.stringify(res));
+    });
     wx.chooseImage({
        count: 1, // 默认9
        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
        success: function (res) {
+
            var localIds = res.localIds[0].toString(); //
            alert("返回图片本地IDlocalIds===!!!" + localIds);
            wx.uploadImage({
                localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
                isShowProgressTips: 1, // 默认为1，显示进度提示
                success: function (res) {
+
                    var serverId = res.serverId; // 返回图片的服务器端ID
                    alert("返回在服务器上的地址serverId===" + serverId);
                    wx.downloadImage({
                        serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
                        isShowProgressTips: 1, // 默认为1，显示进度提示
                        success: function (res) {
+
                            var localId = res.localId; // 返回图片下载后的本地ID
                            alert("下载在本地后的localId" + localId);
                            wx.getLocalImgData({
                                localId: localId, // 图片的localID
                                success: function (res) {
+
                                    var localData = res.localData;
                                    alert("得到本地的图片bese64" + localData);
                                }
                            });
                        }
                    });
+               },
+               error: function(res){
+                   alert(res);
+                   alert(JSON.stringify(res));
                }
            });
        }
