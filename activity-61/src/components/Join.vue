@@ -4,7 +4,7 @@
     <span class="tikNum">1000</span>
     <span class="openNUm">1000</span>
 
-    <div class="Photo"></div>
+    <div class="Photo" @click="getPhoto()"></div>
 
     <input type="text" name="" class="name">
     <input type="number" name="" class="tel"></input>
