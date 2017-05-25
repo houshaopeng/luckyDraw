@@ -188,6 +188,10 @@ Vue.prototype.$getPhoto = function(){
 
                                    var localData = res.localData;
                                    alert("得到本地的图片bese64" + localData);
+                               },
+                               fail: function(error){
+                                   alert(error);
+                                   alert(JSON.stringify(error));
                                }
                            });
                        }
