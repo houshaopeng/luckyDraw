@@ -32,8 +32,16 @@ var GetRequest = function(key){
 Vue.prototype.$nickName = decodeURI(GetRequest('nickname'));
 Vue.prototype.$userToken = GetRequest('userToken');
 Vue.prototype.$gameId = GetRequest('gameId');
+console.log(Vue.prototype.$nickName+"---"+Vue.prototype.$userToken+"---"+Vue.prototype.$gameId);
+
 
 /*调用接口得到签名*/
+var pageShareData = {
+  'title':'最美宝宝评选啦',
+  'desc':'拉好友投票，提升名次，赢取奖品',
+  'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken,
+  'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
+}
 var getSignParam = {
     'shareUrl': window.location.href,
     'userToken':GetRequest('userToken'),
@@ -68,11 +76,78 @@ var wxConfig = function (conf) {
         timestamp: conf.timestamp, //生成签名的时间戳
         nonceStr: conf.nonceStr, //生成签名的随机串
         signature: conf.signature, //签名
-        jsApiList: ['chooseImage', 'previewImage']
+        jsApiList: ['chooseImage','previewImage','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
     });
 
     wx.ready(function () {
+      //分享给朋友
+      wx.onMenuShareAppMessage({
+          title: pageShareData.title, // 分享标题
+          desc: pageShareData.desc, // 分享描述
+          link: pageShareData.link, // 分享链接
+          imgUrl: pageShareData.imgUrl, // 分享图标
+          type: 'link', // 分享类型,music、video或link，不填默认为link
+          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          success: function () {
+              //SaveShareType(1);分享成功后执行的回调
+          },
+          cancel: function () {
 
+          }
+      });
+      //分享给朋友圈
+      wx.onMenuShareTimeline({
+          title: pageShareData.title, // 分享标题
+          link: pageShareData.link, // 分享链接
+          imgUrl: pageShareData.imgUrl, // 分享图标
+          success: function () {
+
+          },
+          cancel: function () {
+              // 用户取消分享后执行的回调函数
+          }
+      });
+
+      //分享到QQ
+      wx.onMenuShareQQ({
+          title: pageShareData.title, // 分享标题
+          desc: pageShareData.desc, // 分享描述
+          link: pageShareData.link, // 分享链接
+          imgUrl: pageShareData.imgUrl, // 分享图标
+          success: function () {
+
+          },
+          cancel: function () {
+
+          }
+      });
+
+      //分享到腾讯微博
+      wx.onMenuShareWeibo({
+          title: pageShareData.title, // 分享标题
+          desc: pageShareData.desc, // 分享描述
+          link: pageShareData.link, // 分享链接
+          imgUrl: pageShareData.imgUrl, // 分享图标
+          success: function () {
+
+          },
+          cancel: function () {
+
+          }
+      });
+      //分享到QQ空间
+      wx.onMenuShareQZone({
+          title: pageShareData.title, // 分享标题
+          desc: pageShareData.desc, // 分享描述
+          link: pageShareData.link, // 分享链接
+          imgUrl: pageShareData.imgUrl, // 分享图标
+          success: function () {
+
+          },
+          cancel: function () {
+
+          }
+      });
     });
 
     wx.error(function(res){
