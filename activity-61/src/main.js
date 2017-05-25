@@ -160,10 +160,6 @@ window.onload = function(){
 /*提供一个全局方法，用来开启摄像头*/
 Vue.prototype.$getPhoto = function(){
     alert("调用摄像头开始")
-    wx.error(function(res){
-       alert(res);
-       alert(JSON.stringify(res));
-    });
     wx.chooseImage({
        count: 1, // 默认9
        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -174,7 +170,7 @@ Vue.prototype.$getPhoto = function(){
            localIds = res.localIds;
            alert("返回图片本地IDlocalIds===!!!" + localIds);
            wx.uploadImage({
-               localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+               localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
                isShowProgressTips: 1, // 默认为1，显示进度提示
                success: function (res) {
                    var serverId = res.serverId; // 返回图片的服务器端ID
@@ -197,9 +193,9 @@ Vue.prototype.$getPhoto = function(){
                        }
                    });
                },
-               error: function(res){
-                   alert(res);
-                   alert(JSON.stringify(res));
+               fail: function(error){
+                   alert(error);
+                   alert(JSON.stringify(error));
                }
            });
        }
