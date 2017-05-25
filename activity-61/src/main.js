@@ -7,6 +7,7 @@ import vueResource from 'vue-resource'
 Vue.use(vueResource)
 Vue.config.productionTip = false
 
+import Swiper from "../static/js/swiper.js"
 
 
 /*公共方法*/
