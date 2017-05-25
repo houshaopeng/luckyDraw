@@ -166,7 +166,7 @@ Vue.prototype.$getPhoto = function(){
        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
        success: function (res) {
            var localIds = res.localIds[0].toString(); //
-           alert("返回图片本地IDlocalIds===" + localIds);
+           alert("返回图片本地IDlocalIds===!!!" + localIds);
            wx.uploadImage({
                localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
                isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -180,7 +180,7 @@ Vue.prototype.$getPhoto = function(){
                            var localId = res.localId; // 返回图片下载后的本地ID
                            alert("下载在本地后的localId" + localId);
                            wx.getLocalImgData({
-                               localId: '', // 图片的localID
+                               localId: localId, // 图片的localID
                                success: function (res) {
                                    var localData = res.localData;
                                    alert("得到本地的图片bese64" + localData);
