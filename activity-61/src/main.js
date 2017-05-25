@@ -76,7 +76,7 @@ var wxConfig = function (conf) {
         timestamp: conf.timestamp, //生成签名的时间戳
         nonceStr: conf.nonceStr, //生成签名的随机串
         signature: conf.signature, //签名
-        jsApiList: ['getLocalImgData','chooseImage','previewImage','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+        jsApiList: ['getLocalImgData',"chooseImage", "previewImage", "uploadImage", "downloadImage",'onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
     });
 
     wx.ready(function () {
