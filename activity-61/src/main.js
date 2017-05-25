@@ -76,7 +76,7 @@ var wxConfig = function (conf) {
         timestamp: conf.timestamp, //生成签名的时间戳
         nonceStr: conf.nonceStr, //生成签名的随机串
         signature: conf.signature, //签名
-        jsApiList: ['chooseImage','previewImage','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+        jsApiList: ['getLocalImgData','chooseImage','previewImage','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
     });
 
     wx.ready(function () {
@@ -165,8 +165,15 @@ Vue.prototype.$getPhoto = function(){
        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
        success: function (res) {
-           var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-           alert("fsdfsfsd");
+           var localIds = res.localIds[0].toString(); // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+           alert("返回图片本地IDlocalIds===" + localIds);
+           wx.getLocalImgData({
+               localId: localIds, // 图片的localID
+               success: function (res) {
+                   var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+                   alert("localData===" + localData);
+               }
+           });
        }
     });
 }
