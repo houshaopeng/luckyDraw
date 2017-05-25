@@ -27,7 +27,7 @@ export default {
   },
   methods:{
     func:function(){
-      location.hash = '/join';
+      location.hash = '/join/1111';
     },
     /*活动查询接口*/
     queryActive:function(){

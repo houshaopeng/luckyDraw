@@ -32,6 +32,7 @@ var GetRequest = function(key){
 Vue.prototype.$nickName = decodeURI(GetRequest('nickname'));
 Vue.prototype.$userToken = GetRequest('userToken');
 Vue.prototype.$gameId = GetRequest('gameId');
+
 console.log(Vue.prototype.$nickName+"---"+Vue.prototype.$userToken+"---"+Vue.prototype.$gameId);
 
 
@@ -175,27 +176,30 @@ Vue.prototype.$getPhoto = function(){
                success: function (res) {
                    var serverId = res.serverId; // 返回图片的服务器端ID
                    alert("返回在服务器上的地址serverId===" + serverId);
-                   wx.downloadImage({
-                       serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                       isShowProgressTips: 1, // 默认为1，显示进度提示
-                       success: function (res) {
+                   //TODO upload file
 
-                           var localId = res.localId; // 返回图片下载后的本地ID
-                           alert("下载在本地后的localId" + localId);
-                           wx.getLocalImgData({
-                               localId: localId, // 图片的localID
-                               success: function (res) {
 
-                                   var localData = res.localData;
-                                   alert("得到本地的图片bese64" + localData);
-                               },
-                               fail: function(error){
-                                   alert(error);
-                                   alert(JSON.stringify(error));
-                               }
-                           });
-                       }
-                   });
+                   // upload file
+                   // wx.downloadImage({
+                   //     serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                   //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                   //     success: function (res) {
+
+                   //         var localId = res.localId; // 返回图片下载后的本地ID
+                   //         alert("下载在本地后的localId" + localId);
+                   //         wx.getLocalImgData({
+                   //             localId: localId, // 图片的localID
+                   //             success: function (res) {
+                   //                 var localData = res.localData;
+                   //                 alert("得到本地的图片bese64" + localData);
+                   //             },
+                   //             fail: function(error){
+                   //                 alert(error);
+                   //                 alert(JSON.stringify(error));
+                   //             }
+                   //         });
+                   //     }
+                   // });
                },
                fail: function(error){
                    alert(error);

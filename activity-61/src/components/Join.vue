@@ -32,6 +32,7 @@
       },
       //调用摄像头,本地相册
       getPhoto:function(){
+        alert($router.params.joinId);
         Vue.prototype.$getPhoto();
       },
     },
