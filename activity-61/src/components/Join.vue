@@ -5,7 +5,7 @@
     <span class="openNUm">{{metrix.totalPageViews}}</span>
 
     <div class="Photo" @click="getPhoto()"></div>
-
+    <img :src="imageUrl"/>
     <input type="text" name="" class="name" v-model="userName">
     <input type="number" name="" class="tel" v-model="telNum"></input>
 
@@ -54,7 +54,26 @@
                    success: function (res) {
                        var serverId = res.serverId; // 返回图片的服务器端ID
                        alert("返回在服务器上的地址serverId===!!!" + serverId);
-                       this.getserverId = serverId;
+                       this.$http.post("/game-app/file/upload",{
+                        "acitveName":1,
+                        "fileType":"png",
+                        "mediaId":res.serverId,
+                        "userToken":window.$userToken,
+                       }).then((res)=>{
+                           alert("diaoyong");
+                           alert(res.data);
+                           alert(JSON.stringify(res.data));
+                          if(res.data.code == '000000') {
+                              //
+                              this.imageUrl=localIds[0]
+                          } else {
+                            alert("failed");
+                          }
+                       },(error)=>{
+                          alert(error);
+                          alert(JSON.stringify(error));
+                       })
+
 
 
                    },
