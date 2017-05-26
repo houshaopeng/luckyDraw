@@ -7,24 +7,14 @@
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <ul>
-                <li>
-                  <div class="gift_box">
-                    <img src="../assets/gift_1.png" alt="">
-                    <p>360儿童智能手表</p>
-                  </div>
-                  <div class="gift_box">
-                    <img src="../assets/gift_2.png" alt="">
-                    <p>步步高点读机</p>
-                  </div>
-                  <div class="gift_box">
-                    <img src="../assets/gift_3.png" alt="">
-                    <p>智能机器人</p>
+                <li><!-- TODO -->
+                  <div class="gift_box" v-for="item in prizes" >
+                    <img :src="item.prizePicUrl" alt="">
+                    <p>{{item.name}}</p>
                   </div>
                 </li>
               </ul>
             </div>
-            <div class="swiper-slide" style="background:yellow">slider2</div>
-            <div class="swiper-slide">slider3</div>
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
@@ -33,88 +23,17 @@
     <div class="production">
      <input type="text" class="search" placeholder="请输入编号">
       <div class="pictice_box">
-        <div class="pictice">
-          <h3>1846号</h3>
+        <div class="pictice" v-for="item in registrates">
+          <h3>{{item.formatId}}号</h3>
           <div class="pic" @click="getDetail">
-
+              <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
           </div>
           <div class="headPortrait">
 
           </div>
-          <p class="name">多多妈妈</p>
-          <p class="ticket">1000票</p>
+          <p class="name">{{item.name}}</p>
+          <p class="ticket">{{item.declaration}}票</p>
           <div class="vote_btn">
-
-          </div>
-        </div>
-        <div class="pictice">
-          <h3>1846号</h3>
-          <div class="pic">
-
-          </div>
-          <div class="headPortrait">
-
-          </div>
-          <p class="name">多多妈妈</p>
-          <p class="ticket">1000票</p>
-          <div class="vote_btn">
-
-          </div>
-        </div>
-        <div class="pictice">
-          <h3>1846号</h3>
-          <div class="pic">
-
-          </div>
-          <div class="headPortrait">
-
-          </div>
-          <p class="name">多多妈妈</p>
-          <p class="ticket">1000票</p>
-          <div class="vote_btn">
-
-          </div>
-        </div>
-        <div class="pictice">
-          <h3>1846号</h3>
-          <div class="pic">
-
-          </div>
-          <div class="headPortrait">
-
-          </div>
-          <p class="name">多多妈妈</p>
-          <p class="ticket">1000票</p>
-          <div class="vote_btn">
-
-          </div>
-        </div>
-        <div class="pictice">
-          <h3>1846号</h3>
-          <div class="pic">
-
-          </div>
-          <div class="headPortrait">
-
-          </div>
-          <p class="name">多多妈妈</p>
-          <p class="ticket">1000票</p>
-          <div class="vote_btn">
-
-          </div>
-        </div>
-        <div class="pictice">
-          <h3>1846号</h3>
-          <div class="pic">
-
-          </div>
-          <div class="headPortrait">
-
-          </div>
-          <p class="name">多多妈妈</p>
-          <p class="ticket">1000票</p>
-          <div class="vote_btn">
-
           </div>
         </div>
       </div>
@@ -127,10 +46,13 @@ export default {
   name: 'home',
   data () {
     return {
+       prizes :[],
+       registrates: []
 
     }
   },
   methods:{
+
     // 我要报名
     signUp(){
       //location.hash = '/join/'+Vue.prototype.$userToken;
@@ -152,7 +74,7 @@ export default {
         alert("error")
       })
     },
-    
+
     picticeList(){
       this.$http.post(
         // "http://shanlingame.oneforce.cn/game-app/registrate",
@@ -207,13 +129,33 @@ export default {
         }
       })*/
     },
+    initPrize(){
+      this.$http.post("/api/queryAllPrize").then((res)=>{
+        console.log(res.data);
+        this.prizes = res.data.data;
+      })
+    },
+    initRegistrate(){
+      this.$http.post("/api/listRegistrate",{
+        "direction":false,
+        "id":1,
+        "pageNum":"2",
+        "pageSize":"10",
+        "sortName":"createdAt"
+      }).then((res)=>{
+        this.registrates = res.data.registrateDtoList;
+      })
+    }
 
   },
+
   mounted:function(){
 
-    this.queryActive();    //活动查询接口
-    this.bannerScroll();
-    this.picticeList();
+    // this.queryActive();    //活动查询接口
+    // this.bannerScroll();
+    // this.picticeList();
+    this.initPrize();
+    this.initRegistrate();
   }
 }
 </script>
