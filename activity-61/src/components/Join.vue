@@ -6,8 +6,8 @@
 
     <div class="Photo" @click="getPhoto()"></div>
     <img :src="imageUrl"/>
-    <input type="text" name="" class="name" v-model="userName">
-    <input type="number" name="" class="tel" v-model="telNum"></input>
+    <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
+    <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
     <button class="tijiao" @click="submitInfo"></button>
     <button class="guize"></button>
@@ -178,7 +178,7 @@
 }
 /* input框 */
 .join input{
-  width:5.73rem;
+  width:5.33rem;
   height:0.49rem;
   border-radius:0.24rem;
   border:none;
@@ -187,9 +187,11 @@
 }
 .name{
   top:6.93rem;
+  padding: 0  0.2rem;
 }
 .tel{
   top:7.87rem;
+  padding: 0  0.2rem;
 }
 .tijiao{
   width:3.13rem;
@@ -208,7 +210,7 @@
   height:0.85rem;
   position:absolute;
   background-color:transparent;
-  background-image: url('../assets/join_guize.png');
+  background: url('../assets/join_guize.png') no-repeat;
   background-size:100%;
   border:none;
   top:12.5rem;

@@ -7,20 +7,22 @@
       <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <ul>
-                <li><!-- TODO -->
-                  <div class="gift_box" v-for="item in prizes" >
-                    <img :src="item.prizePicUrl" alt="">
-                    <p>{{item.name}}</p>
-                  </div>
-                </li>
-              </ul>
+            <div class="swiper-slide ">
+              <div class="gift_box " v-for="item in prizes.slice(0,3)" >
+                <img :src="item.prizePicUrl" alt="">
+                <p>{{item.name}}</p>
+              </div>
             </div>
+            <div class=" swiper-slide" >
+              <div class="gift_box" v-for="item in prizes.slice(3,6)" >
+                <img :src="item.prizePicUrl" alt="">
+                <p>{{item.name}}</p>
+              </div>
+            </div>    
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
-      </div>
+      </div> 
     </div>
     <div class="production">
       <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
@@ -102,8 +104,9 @@ export default {
     },
     initPrize(){
       this.$http.post("/game-app/queryAllPrize").then((res)=>{
-        console.log(res.data);
+
         this.prizes = res.data.data;
+        console.log(this.prizes);
       })
     },
     initRegistrate(){
@@ -115,6 +118,7 @@ export default {
         "sortName":"votes"
       }).then((res)=>{
         this.registrates = res.data.registrateDtoList;
+        this.bannerScroll();
       })
     }
 
@@ -123,7 +127,7 @@ export default {
   mounted:function(){
 
     // this.queryActive();    //活动查询接口
-    // this.bannerScroll();
+    
     // this.picticeList();
     this.initPrize();
     this.initRegistrate();
@@ -160,8 +164,14 @@ export default {
       .gift_box{
         text-align: center;
         display: inline-block;
-        width: pxTorem(240px) ;
+        width: pxTorem(250px) ;
+        float: left;
         height: 100%;
+        img{
+          width: pxTorem(230px) ;
+          margin: 0 pxTorem(10px) pxTorem(10px);
+          height: pxTorem(160px) ;
+        }
         p{
           margin-top:  pxTorem(-10px) ;
           color: #ffffff;
@@ -207,15 +217,17 @@ export default {
         h3{
           margin-top: pxTorem(10px);
           font-weight: bloder;
-
           color: #ffffff;
         }
         .pic{
           margin: pxTorem(45px) auto;
           width: pxTorem(293px);
-          background:  url("../assets/pic.jpg") no-repeat center;
-          background-size: 100%;
           height: pxTorem(314px);
+          overflow: hidden;
+          img{
+            width: 100%;
+           
+          }
         }
         .headPortrait{
           width: pxTorem(60px);

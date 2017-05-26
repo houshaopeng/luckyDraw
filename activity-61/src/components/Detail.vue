@@ -1,13 +1,19 @@
 <template>
   <div class="detail">
     <div class="serial">
+    5号
       {{registrate.formatId}}
     </div>
     <div class="ticket_number">
+
+
+
+    票数:6
        {{registrate.votes}}
     </div>
     <div class="detail_pic">
         <img :src="image.picUrl" v-for="image in registrate.activeUserPicDtos"/>
+        <img src="../assets/photo.jpg" alt="">
     </div>
     <div class="btn_box">
       <div class="detail_btn1" @click="vote">
@@ -82,7 +88,7 @@ export default {
     .serial{
       float: left;
       margin-top:  pxTorem(91px) ;
-      margin-left: pxTorem(25px) ;
+      margin-left: pxTorem(60px) ;
     }
     .ticket_number{
       float: right;
@@ -93,10 +99,14 @@ export default {
       position: absolute;
       width: pxTorem(630px);
       height:pxTorem(840px);
-      background:red;
       margin-left: pxTorem(-315px);
       top:  pxTorem(190px);
       left: 50%;
+      overflow: hidden;
+      background: #cacaca;
+      img{
+        width: 100%;
+      }
     }
     .btn_box{
       position: absolute;
