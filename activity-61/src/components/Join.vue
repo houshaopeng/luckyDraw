@@ -86,6 +86,7 @@
                     alert("上传成功");
                     this.imageUrl=localId;//渲染上去
                     this.fileUrl=res.data.fileInfo.fileUrl;
+                    alert(this.fileUrl);
                 } else {
                   //alert("failed");
                 }
