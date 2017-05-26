@@ -6,7 +6,7 @@
 
     <div class="Photo" @click="getPhoto()"></div>
 
-    <input type="text" name="" class="name" v-model="serverId">
+    <input type="text" name="" class="name" v-model="getserverId">
     <input type="number" name="" class="tel"></input>
 
     <button class="tijiao"></button>
@@ -21,7 +21,7 @@
     data(){
       return {
         telNum:'',
-        serverId:'',
+        getserverId:'',
       }
     },
     methods:{
@@ -32,8 +32,35 @@
       },
       //调用摄像头,本地相册,渲染并上传
       getPhoto:function(){
-        this.serverId = Vue.prototype.$getPhoto();
-        alert("123++++"+this.serverId);
+        //this.serverId = Vue.prototype.$getPhoto();
+        //alert("123++++"+this.serverId);
+        alert("调用摄像头开始");
+        wx.chooseImage({
+           count: 1, // 默认9
+           sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+           sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+           success: function (res) {
+
+               var localIds = res.localIds[0].toString(); //
+               localIds = res.localIds;
+               alert("返回图片本地IDlocalIds===!!!" + localIds);
+               wx.uploadImage({
+                   localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                   isShowProgressTips: 1, // 默认为1，显示进度提示
+                   success: function (res) {
+                       var serverId = res.serverId; // 返回图片的服务器端ID
+                       alert("返回在服务器上的地址serverId===" + serverId);
+                       this.getserverId = serverId;
+
+
+                   },
+                   fail: function(error){
+                       alert(error);
+                       alert(JSON.stringify(error));
+                   }
+               });
+           }
+        });
       },
 
 
