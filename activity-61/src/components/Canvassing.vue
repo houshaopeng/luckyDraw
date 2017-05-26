@@ -1,0 +1,104 @@
+<template>
+  <div class="canvassing">
+   
+    <div class="number">
+      您的编号为1813号
+    </div>
+    <div class="canvassing_pic">
+
+    </div>
+    <div class="btn_box">
+      <div class="canvassing_btn1">
+        
+      </div>
+      <div class="canvassing_btn2">
+        
+      </div>
+    </div>
+    <div class="mask">
+      
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'home',
+  data () {
+    return {
+
+    }
+  },
+  methods:{
+    
+    
+
+  },
+  mounted:function(){
+    
+  
+  }
+}
+</script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang='scss'>
+@import "../../static/css/swiper.css";
+  $font-size-base:75px;
+  @function pxTorem($px) {
+      @return $px / $font-size-base * 1rem;
+  }
+  .canvassing{
+    background:  url("../assets/canvassing_bg.jpg") no-repeat center;
+    height:pxTorem(1218px) ;
+    width:pxTorem(750px) ;
+    background-size: 100%;
+    color: #ffffff;
+    padding-top: pxTorem(105px) ;
+    font-size: pxTorem(42px) ;
+    text-align: center;
+   
+    .number{
+      height:pxTorem(50px) ;
+      width:pxTorem(750px) ;
+    }
+    .canvassing_pic{
+      position: absolute;
+      width: pxTorem(630px);
+      height:pxTorem(840px);
+      background:red;
+      margin-left: pxTorem(-315px);
+      top:  pxTorem(190px);
+      left: 50%;
+    }
+    .btn_box{
+      position: absolute;
+      left: 50%;
+      bottom: pxTorem(120px);
+      height:pxTorem(160px) ;
+      width:pxTorem(633px) ; 
+      margin-left: pxTorem(-316.5px);
+    }
+    .canvassing_btn1,.canvassing_btn2{
+      float: left;
+      margin-left: pxTorem(50px) ;
+      background:  url("../assets/canvassing1.png") no-repeat center;
+      height:pxTorem(60px) ;
+      width:pxTorem(240px) ;
+      background-size: 100%;
+      margin-bottom: pxTorem(10px) ;
+    }
+    .canvassing_btn2{
+      background:  url("../assets/canvassing2.png") no-repeat center;
+       background-size: 100%;
+    }
+    .mask{
+      background:  url("../assets/mask_bg.png") no-repeat center;
+      height:pxTorem(1323px) ;
+      width:pxTorem(750px) ;
+      background-size: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+</style>

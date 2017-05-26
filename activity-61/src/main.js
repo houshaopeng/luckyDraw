@@ -9,6 +9,9 @@ Vue.config.productionTip = false
 
 // TODO laji daima
 
+import Swiper from "../static/js/swiper.js"
+
+
 /*公共方法*/
 var GetRequest = function(key){
     var url = "?" + location.href.split("?")[1]; //获取url中"?"符后的字串
