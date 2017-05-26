@@ -33,6 +33,7 @@ export default {
   methods:{
     back(){
       location.hash = '/join';
+
     },
     vote(){
       this.$http.post("/game-app/registrate/votes",{
@@ -51,7 +52,7 @@ export default {
     }
 
   },
-  mounted:function(){
+  create:function(){
         this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
               alert(this.registrateId + "不存在")

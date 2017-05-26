@@ -43,12 +43,14 @@ window.$sourceUserToken = GetRequest('sourceUserToken');
 
 // /*调用接口得到签名*/
 var pageShareData = function(){
-  return {
+  var a =  {
     'title':'最美宝宝评选啦',
     'desc':'拉好友投票，提升名次，赢取奖品',
     'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + window.$userToken +"&detailId="+window.$detailId + "&sourceUserToken="+ window.$sourceUserToken,
     'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
   }
+  alert(JSON.stringify(a));
+  return a;
 }
 
 
