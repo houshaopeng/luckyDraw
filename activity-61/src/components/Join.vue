@@ -115,6 +115,9 @@
       //TODO,在这里拿到全局的activityID,这个是唯一的。
     },
     mounted:function(){
+      this.$http.post("/game-app/queryTotalTime").then((res)=>{
+        this.metrix = res.data.data;
+      })
       window.getWxJsToken();
     }
   }
