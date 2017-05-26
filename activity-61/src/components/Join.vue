@@ -101,7 +101,7 @@
           "activeId":1,// TODO
           "mobileNo":this.telNum,
           "name":this.userName,
-          "userToken":Vue.prototype.$userToken, // TODO
+          "userToken":window.$userToken, // TODO
           "picUrl":this.fileUrl
         }))
 
@@ -109,7 +109,7 @@
           "activeId":1,// TODO
           "mobileNo":this.telNum,
           "name":this.userName,
-          "userToken":Vue.prototype.$userToken, // TODO
+          "userToken":window.$userToken, // TODO
           "picUrl":this.fileUrl
         }).then((res)=>{
           if(res.data.code === '000000'){
