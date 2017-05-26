@@ -184,6 +184,7 @@
   overflow: hidden;
   .send_pictice{
     width:100%;
+    height:100%;
   }
 }
 /* input框 */
