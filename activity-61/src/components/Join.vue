@@ -94,6 +94,7 @@
              })
       },
       submitInfo(){
+        alert("确认提交了")
         this.$http.post("/game-app/registrate",{
           "activeId":1,// TODO
           "mobileNo":this.telNum,
