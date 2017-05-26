@@ -9,7 +9,7 @@
     <div class="Photo" @click="getPhoto()" >
       <img :src="imageUrl" class="send_pictice" />
     </div>
-    
+
     <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
@@ -42,8 +42,7 @@
         //this.serverId = Vue.prototype.$getPhoto();
         //alert("123++++"+this.serverId);
 
-        alert("调用摄像头开始");
-        
+
 
         //alert("调用摄像头开始");
         var that = this;
@@ -151,7 +150,7 @@
   background-size:100%;
   position:relative;
   overflow: hidden;
- 
+
 }
 .join>span{
   width:1.87rem;
