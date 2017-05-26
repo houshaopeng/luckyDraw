@@ -83,8 +83,9 @@
                  alert(res.data);
                  alert(JSON.stringify(res.data));
                 if(res.data.code == '000000') {
-
-                    this.imageUrl=res.data.fileInfo.fileUrl;
+                    alert("上传成功");
+                    this.imageUrl=localId;//渲染上去
+                    this.fileUrl=res.data.fileInfo.fileUrl;
                 } else {
                   //alert("failed");
                 }
@@ -100,7 +101,7 @@
           "mobileNo":this.telNum,
           "name":this.userName,
           "userToken":Vue.prototype.$userToken, // TODO
-          "picUrl":this.imageUrl
+          "picUrl":this.fileUrl
         }))
 
         this.$http.post("/game-app/registrate",{
@@ -108,7 +109,7 @@
           "mobileNo":this.telNum,
           "name":this.userName,
           "userToken":Vue.prototype.$userToken, // TODO
-          "picUrl":this.imageUrl
+          "picUrl":this.fileUrl
         }).then((res)=>{
           if(res.data.code === '000000'){
             //alert("chengong");
