@@ -7,7 +7,7 @@
 
 
     <div class="Photo" @click="getPhoto()" >
-      <img :src="imageUrl" class="send_pictice" />
+      <img :src="imageUrl"/>
     </div>
 
     <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
@@ -181,9 +181,8 @@
   position:absolute;
   top: 4rem;
   left: 2.67rem;
-  overflow: hidden;
 }
-..Photo{
+.Photo img{
   width:100%;
   height:100%;
 }
