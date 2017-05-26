@@ -2,7 +2,7 @@
   <div class="home">
     <div class="topPage">
       <p @click="func" class="join_btn"></p>
-      <p class="rule_btn"></p>
+      <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -35,86 +35,86 @@
       <div class="pictice_box">
         <div class="pictice">
           <h3>1846号</h3>
-          <div class="pic">
-            
+          <div class="pic" @click="getDetail">
+
           </div>
           <div class="headPortrait">
-            
+
           </div>
           <p class="name">多多妈妈</p>
           <p class="ticket">1000票</p>
           <div class="vote_btn">
-            
+
           </div>
         </div>
         <div class="pictice">
           <h3>1846号</h3>
           <div class="pic">
-            
+
           </div>
           <div class="headPortrait">
-            
+
           </div>
           <p class="name">多多妈妈</p>
           <p class="ticket">1000票</p>
           <div class="vote_btn">
-            
+
           </div>
         </div>
         <div class="pictice">
           <h3>1846号</h3>
           <div class="pic">
-            
+
           </div>
           <div class="headPortrait">
-            
+
           </div>
           <p class="name">多多妈妈</p>
           <p class="ticket">1000票</p>
           <div class="vote_btn">
-            
+
           </div>
         </div>
         <div class="pictice">
           <h3>1846号</h3>
           <div class="pic">
-            
+
           </div>
           <div class="headPortrait">
-            
+
           </div>
           <p class="name">多多妈妈</p>
           <p class="ticket">1000票</p>
           <div class="vote_btn">
-            
+
           </div>
         </div>
         <div class="pictice">
           <h3>1846号</h3>
           <div class="pic">
-            
+
           </div>
           <div class="headPortrait">
-            
+
           </div>
           <p class="name">多多妈妈</p>
           <p class="ticket">1000票</p>
           <div class="vote_btn">
-            
+
           </div>
         </div>
         <div class="pictice">
           <h3>1846号</h3>
           <div class="pic">
-            
+
           </div>
           <div class="headPortrait">
-            
+
           </div>
           <p class="name">多多妈妈</p>
           <p class="ticket">1000票</p>
           <div class="vote_btn">
-            
+
           </div>
         </div>
       </div>
@@ -131,15 +131,24 @@ export default {
     }
   },
   methods:{
-    func:function(){
-      location.hash = '/join/'+Vue.prototype.$userToken;
+    func(){
+      //location.hash = '/join/'+Vue.prototype.$userToken;
+      location.hash = 'join';
     },
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
-        autoplay: 2000,//可选选项，自动滑动
+        autoplay: 2000,//可选选项，自动滑
         prevButton:'.swiper-button-prev',
         nextButton:'.swiper-button-next',
       })
+    },
+    /*规则查询*/
+    getRule(){
+      location.hash = 'Rule'
+    },
+    /*跳转到详情页*/
+    getDetail(){
+      location.hash = 'Detail'
     },
     /*活动查询接口*/
    queryActive:function(){
@@ -164,7 +173,7 @@ export default {
 
   },
   mounted:function(){
-    
+
     this.queryActive();//活动查询接口
     this.bannerScroll();
   }
@@ -189,13 +198,13 @@ export default {
       background-size: 100%;
       position: absolute;
       top: pxTorem(30px) ;
-      right: pxTorem(30px) ; 
+      right: pxTorem(30px) ;
     }
     .banner{
       width: pxTorem(750px) ;
       height: pxTorem(205px) ;
       position: absolute;
-      top: pxTorem(1125px) ; 
+      top: pxTorem(1125px) ;
       .gift_box{
         text-align: center;
         display: inline-block;
@@ -216,7 +225,7 @@ export default {
     background-size: 100%;
     position: absolute;
     top: pxTorem(850px) ;
-    left:50%; 
+    left:50%;
     margin-left: pxTorem(-151px) ;
   }
 
@@ -234,7 +243,7 @@ export default {
       height:  pxTorem(1730px) ;
       width: pxTorem(750px) ;
       margin-top: pxTorem(80px) ;
-      background:red; 
+      background:red;
       .pictice{
         float: left;
         width: pxTorem(336px);
@@ -291,6 +300,6 @@ export default {
       }
     }
   }
-  
- 
+
+
 </style>
