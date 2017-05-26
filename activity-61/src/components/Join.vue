@@ -5,8 +5,10 @@
     <span class="openNUm">{{metrix.totalPageViews}}</span>
 
 
-    <div class="Photo" @click="getPhoto()"></div>
-    <img :src="imageUrl"/>
+    <div class="Photo" @click="getPhoto()">
+      <img :src="imageUrl"/>
+    </div>
+
     <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
