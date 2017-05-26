@@ -60,7 +60,7 @@ export default {
     // picticeList(){
     //   this.$http.post(
     //     // "http://shanlingame.oneforce.cn/game-app/registrate",
-    //     "/api/seacherRegistrate",
+    //     "/game-app/seacherRegistrate",
     //     {
     //       // "userToken":"123",
     //       "direction":false,
@@ -92,7 +92,7 @@ export default {
       location.hash = '/Detail/'+registrateId;
     },
     findRegistrate(){
-        this.$http.post("/api/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+        this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
               alert(this.registrateId + "不存在")
             } else {
@@ -101,17 +101,17 @@ export default {
         })
     },
     initPrize(){
-      this.$http.post("/api/queryAllPrize").then((res)=>{
+      this.$http.post("/game-app/queryAllPrize").then((res)=>{
         console.log(res.data);
         this.prizes = res.data.data;
       })
     },
     initRegistrate(){
-      this.$http.post("/api/listRegistrate",{
+      this.$http.post("/game-app/listRegistrate",{
         "direction":false,
         "id":1,
         "pageNum":"1",
-        "pageSize":"100",
+        "pageSize":"10",
         "sortName":"votes"
       }).then((res)=>{
         this.registrates = res.data.registrateDtoList;

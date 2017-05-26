@@ -48,15 +48,14 @@ export default {
 
   },
   mounted:function(){
-        this.$http.post("/api/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+        this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
               alert(this.registrateId + "不存在")
             } else {
               this.registrate = res.data.data;
             }
         })
-        Vue.prototype.$detailId=this.registrateId;
-        Vue.prototype.$link = "http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&detailId="+Vue.prototype.$detailId + "&sourceUserToken="+ Vue.prototype.$detailId;
+        window.$detailId=this.registrateId;
 
   }
 }

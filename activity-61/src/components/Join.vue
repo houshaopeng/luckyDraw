@@ -68,7 +68,7 @@
       },
 
       submitInfo(){
-        this.$http.post("/api/registrate",{
+        this.$http.post("/game-app/registrate",{
           "activeId":1,// TODO
           "mobileNo":this.telNum,
           "name":this.userName,

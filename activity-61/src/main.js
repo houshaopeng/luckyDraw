@@ -60,12 +60,11 @@ var getSignParam = {
 };
 var getSignUrl = '/weiXin/getSign';
 var isDebug = false;
-var hostUrl = "http://120.27.220.25:8083";
 
 var getWxJsToken = function () {  // 获取微信签名验证，得到config
     var saveData = JSON.stringify(getSignParam);
     $.ajax({
-        url: hostUrl + getSignUrl,
+        url: "/game-app"+ getSignUrl,
         type: "post",
         data: saveData,
         headers: {

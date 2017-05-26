@@ -35,11 +35,11 @@ export default {
       location.hash = '/join';
     },
     vote(){
-      this.$http.post("/api/registrate/votes",{
-          "activeId":1,
+      this.$http.post("/game-app/registrate/votes",{
+          "activeId":"1",
           "activeRegistrateId":this.registrateId,
-          "sourceUser":Vue.prototype.$sourceUserToken, // TODO
-          "voteUser":Vue.prototype.$userToken, //TODO
+          "sourceUser":window.$sourceUserToken, // TODO
+          "voteUser":window.$userToken, //TODO
       }).then((res)=>{
           if(res.data.code == '100063'){
             alert('当天超过投票次数,限制每天三次,同一个作品每天一次');
@@ -52,15 +52,14 @@ export default {
 
   },
   mounted:function(){
-        this.$http.post("/api/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+        this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
               alert(this.registrateId + "不存在")
             } else {
               this.registrate = res.data.data;
             }
         })
-        Vue.prototype.$detailId=this.registrateId;
-        Vue.prototype.$link = "http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&detailId="+Vue.prototype.$detailId + "&sourceUserToken="+ Vue.prototype.$detailId;
+        window.$detailId=this.registrateId;
   },
 }
 </script>

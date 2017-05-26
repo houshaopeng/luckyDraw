@@ -28,13 +28,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        "/api": {
+        "/game-app": {
             //target:'http://shanlingame.oneforce.cn/game-app',
-            target:'http://10.1.16.22:9005',
+            target:'http://120.27.220.25:8083',
             // target:'http://10.1.16.120:8082',
             changeOrigin: true,
             //pathRewrite: {'^/api' : '/'},
-            pathRewrite: {'^/api' : '/'},
+            pathRewrite: {'^/game-app' : '/'},
         },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
