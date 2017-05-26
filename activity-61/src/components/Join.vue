@@ -5,8 +5,10 @@
     <span class="openNUm">{{metrix.totalPageViews}}</span>
 
 
-    <div class="Photo" @click="getPhoto()"></div>
-    <img :src="imageUrl"/>
+    <div class="Photo" @click="getPhoto()" >
+      <img :src="imageUrl" class="send_pictice" />
+    </div>
+    
     <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
@@ -36,16 +38,16 @@
       },
       //调用摄像头,本地相册,渲染并上传
       getPhoto:function(){
+        var that = this;
         //this.serverId = Vue.prototype.$getPhoto();
         //alert("123++++"+this.serverId);
         alert("调用摄像头开始");
-        var that = this;
+        
         wx.chooseImage({
            count: 1, // 默认9
            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
            success: function (res) {
-
                var localIds = res.localIds[0].toString(); //
                localIds = res.localIds;
                alert("返回图片本地IDlocalIds===!!!" + localIds);
@@ -143,6 +145,8 @@
   background-image: url('../assets/join_bg.jpg');
   background-size:100%;
   position:relative;
+  overflow: hidden;
+ 
 }
 .join>span{
   width:1.87rem;
@@ -173,10 +177,10 @@
   position:absolute;
   top: 4rem;
   left: 2.67rem;
-}
-.Photo img{
-  width:100%;
-  height:100%;
+  overflow: hidden;
+  .send_pictice{
+    width:100%;
+  }
 }
 /* input框 */
 .join input{

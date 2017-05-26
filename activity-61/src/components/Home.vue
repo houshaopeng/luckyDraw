@@ -25,8 +25,11 @@
       </div> 
     </div>
     <div class="production">
+    <div class="production_head">
       <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
-
+      <div class="search_btn"></div>
+    </div>
+      
       <div class="pictice_box">
         <div class="pictice" v-for="item in registrates">
           <h3>{{item.formatId}}号</h3>
@@ -192,20 +195,36 @@ export default {
   }
 
   .production{
-    background:  url("../assets/all_show-bg.jpg") no-repeat center;
-    height:pxTorem(2069px) ;
+    /*height:pxTorem(2069px) ;*/
+
     width:pxTorem(750px) ;
-    background-size: 100%;
-    .search{
-      margin: pxTorem(160px) 0  0 pxTorem(160px) ;
-      border: none;
-      width: pxTorem(460px) ;
+    .production_head{
+      background:  url("../assets/all_show_header.jpg") no-repeat center;
+      height:pxTorem(256px) ;
+      width:pxTorem(750px) ;
+      background-size: 100%;
+      .search{
+        margin: pxTorem(160px) 0  0 pxTorem(160px) ;
+        border: none;
+        width: pxTorem(460px) ;
+      }
+      .search_btn{
+        height:pxTorem(50px) ;
+        width:pxTorem(60px) ;
+        position: absolute;
+        left: pxTorem(96px);
+        bottom:pxTorem(-188px);
+        z-index: 10;
+      }
     }
+    
     .pictice_box{
-      height:  pxTorem(1730px) ;
       width: pxTorem(750px) ;
-      margin-top: pxTorem(80px) ;
-      background:red;
+      background:url("../assets/all_show_body.jpg") ;
+      background-size:100%; 
+      background-repeat: repeat;
+      margin-top: pxTorem(-2px);
+      height:pxTorem(2930px) ;
       .pictice{
         float: left;
         width: pxTorem(336px);
