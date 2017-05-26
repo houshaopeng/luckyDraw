@@ -101,7 +101,7 @@
           "name":this.userName,
           "userToken":Vue.prototype.$userToken, // TODO
           "picUrl":this.imageUrl
-      }))
+        }))
 
         this.$http.post("/game-app/registrate",{
           "activeId":1,// TODO
@@ -109,7 +109,7 @@
           "name":this.userName,
           "userToken":Vue.prototype.$userToken, // TODO
           "picUrl":this.imageUrl
-      }).then((res)=>{
+        }).then((res)=>{
           if(res.data.code === '000000'){
             //alert("chengong");
             // todo
@@ -117,7 +117,10 @@
           } else {
             alert("错误信息");
           }
-      })
+        },(error)=>{
+                alert(error);
+                (JSON.stringify(error));
+             })
       }
 
 
