@@ -1,15 +1,15 @@
 <template>
   <div class="join">
-    <span class="joinNum">1000</span>
-    <span class="tikNum">1000</span>
-    <span class="openNUm">1000</span>
+    <span class="joinNum">{{metrix.totalRegistrates}}</span>
+    <span class="tikNum">{{metrix.totalVotesTime}}</span>
+    <span class="openNUm">{{metrix.totalPageViews}}</span>
 
     <div class="Photo" @click="getPhoto()"></div>
 
-    <input type="text" name="" class="name" v-model="getserverId">
-    <input type="number" name="" class="tel"></input>
+    <input type="text" name="" class="name" v-model="userName">
+    <input type="number" name="" class="tel" v-model="telNum"></input>
 
-    <button class="tijiao"></button>
+    <button class="tijiao" @click="submitInfo"></button>
     <button class="guize"></button>
   </div>
 </template>
@@ -21,7 +21,11 @@
     data(){
       return {
         telNum:'',
+        userName:'',
         getserverId:'',
+        metrix:{
+        },
+        imageUrl:'',
       }
     },
     methods:{
@@ -63,7 +67,23 @@
         });
       },
 
-
+      submitInfo(){
+        this.$http.post("/api/registrate",{
+          "activeId":1,// TODO
+          "mobileNo":this.telNum,
+          "name":this.userName,
+          "userToken":Vue.prototype.$userToken, // TODO
+          "picUrl":this.imageUrl
+      }).then((res)=>{
+          if(res.data.code === '000000'){
+            alert("chengong");
+            // todo
+            location.hash = '/Canvassing/'+res.data.data.id;
+          } else {
+            alert("错误信息");
+          }
+      })
+      }
 
 
       //TODO,在这里拿到全局的activityID,这个是唯一的。

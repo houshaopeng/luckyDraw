@@ -2,18 +2,19 @@
   <div class="canvassing">
 
     <div class="number">
-      您的编号为1813号
+      您的编号为{{registrate.formatId}}号
     </div>
     <div class="canvassing_pic">
-
+         <img :src="image.picUrl" v-for="image in registrate.activeUserPicDtos"/>
     </div>
     <div class="btn_box">
       <div class="canvassing_btn1" @click="getMask">
 
       </div>
-      <div class="canvassing_btn2" @click="backHome">
-
+      <router-link to="/home">
+      <div class="canvassing_btn2" >
       </div>
+      </router-link>
     </div>
     <div class="mask" v-show="isMask" @click="dispearMask">
 
@@ -27,6 +28,8 @@ export default {
   data () {
     return {
       isMask : false,
+      registrateId:this.$route.params.registrateId,
+      registrate:{}
     }
   },
   methods:{
@@ -45,7 +48,15 @@ export default {
 
   },
   mounted:function(){
-
+        this.$http.post("/api/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+            if(res.data.code != '000000'){
+              alert(this.registrateId + "不存在")
+            } else {
+              this.registrate = res.data.data;
+            }
+        })
+        Vue.prototype.$detailId=this.registrateId;
+        Vue.prototype.$link = "http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&detailId="+Vue.prototype.$detailId + "&sourceUserToken="+ Vue.prototype.$detailId;
 
   }
 }

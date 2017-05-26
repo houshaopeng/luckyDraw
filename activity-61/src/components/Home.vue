@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="topPage">
-      <p @click="signUp" class="join_btn"></p>
+      <router-link to="/Join">
+      <p  class="join_btn"></p>
+      </router-link>
       <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
@@ -21,18 +23,19 @@
       </div>
     </div>
     <div class="production">
-     <input type="text" class="search" placeholder="请输入编号">
+      <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
+
       <div class="pictice_box">
         <div class="pictice" v-for="item in registrates">
           <h3>{{item.formatId}}号</h3>
-          <div class="pic" @click="getDetail">
+          <div class="pic" @click="getDetail(item.id)">
               <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
           </div>
           <div class="headPortrait">
 
           </div>
           <p class="name">{{item.name}}</p>
-          <p class="ticket">{{item.declaration}}票</p>
+          <p class="ticket">{{item.votes}}票</p>
           <div class="vote_btn">
           </div>
         </div>
@@ -47,52 +50,31 @@ export default {
   data () {
     return {
        prizes :[],
-       registrates: []
+       registrates: [],
+       registrateId: "",
 
     }
   },
   methods:{
 
-    // 我要报名
-    signUp(){
-      //location.hash = '/join/'+Vue.prototype.$userToken;
-      // location.hash = '/join/' ;
-      this.$http.post(
-        // "http://shanlingame.oneforce.cn/game-app/registrate",
-        "/api/registrate",
-        {
-          "activeId":"1",
-          "declaration":"12",
-          "mobileNo":"12345678911",
-          "name":"123",
-          "picUrl":"1",
-          "userToken":"123",
-        },
-      ).then((res)=>{
-        this.$router.push({  path: '/join'  });
-      },(res)=>{
-        alert("error")
-      })
-    },
-
-    picticeList(){
-      this.$http.post(
-        // "http://shanlingame.oneforce.cn/game-app/registrate",
-        "/api/seacherRegistrate",
-        {
-          // "userToken":"123",
-          "direction":false,
-          "id":"1",
-          "pageNum":"2",
-          "pageSize":"10",
-          "sortName":"createdAt",
-        },
-      ).then((res)=>{
-        console.log(res);
-      },(res)=>{
-        alert("error")
-      })
-    },
+    // picticeList(){
+    //   this.$http.post(
+    //     // "http://shanlingame.oneforce.cn/game-app/registrate",
+    //     "/api/seacherRegistrate",
+    //     {
+    //       // "userToken":"123",
+    //       "direction":false,
+    //       "id":"1",
+    //       "pageNum":"1",
+    //       "pageSize":"100",
+    //       "sortName":"createdAt",
+    //     },
+    //   ).then((res)=>{
+    //     console.log(res);
+    //   },(res)=>{
+    //     alert("error")
+    //   })
+    // },
     // 轮播滚动
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
@@ -106,28 +88,17 @@ export default {
       location.hash = 'Rule'
     },
     /*跳转到详情页*/
-    getDetail(){
-      location.hash = 'Detail'
+    getDetail(registrateId){
+      location.hash = '/Detail/'+registrateId;
     },
-    /*活动查询接口*/
-   queryActive:function(){
-     /*  $.ajax({
-        url: "http://10.1.16.22:9005/queryActive",
-        type: "post",
-        data: JSON.stringify({
-          //"gameId":Vue.prototype.$gameId
-          "gameId":1
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-        success: function (data) {
-            console.log(data);
-            if (data.code == "000000") {
-
+    findRegistrate(){
+        this.$http.post("/api/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+            if(res.data.code != '000000'){
+              alert(this.registrateId + "不存在")
+            } else {
+              location.hash='/Detail/'+this.registrateId;
             }
-        }
-      })*/
+        })
     },
     initPrize(){
       this.$http.post("/api/queryAllPrize").then((res)=>{
@@ -139,9 +110,9 @@ export default {
       this.$http.post("/api/listRegistrate",{
         "direction":false,
         "id":1,
-        "pageNum":"2",
-        "pageSize":"10",
-        "sortName":"createdAt"
+        "pageNum":"1",
+        "pageSize":"100",
+        "sortName":"votes"
       }).then((res)=>{
         this.registrates = res.data.registrateDtoList;
       })

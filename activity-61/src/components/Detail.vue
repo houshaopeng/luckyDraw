@@ -1,23 +1,23 @@
 <template>
   <div class="detail">
     <div class="serial">
-      1864
+      {{registrate.formatId}}
     </div>
     <div class="ticket_number">
-      780
+       {{registrate.votes}}
     </div>
     <div class="detail_pic">
-
+        <img :src="image.picUrl" v-for="image in registrate.activeUserPicDtos"/>
     </div>
     <div class="btn_box">
-      <div class="detail_btn1">
-        
+      <div class="detail_btn1" @click="vote">
+
       </div>
-      <div class="detail_btn2">
-        
-      </div>
+      <router-link to="/Join">
+      <div class="detail_btn2"/>
+      </router-link>
     </div>
-    
+
   </div>
 </template>
 
@@ -26,18 +26,42 @@ export default {
   name: 'home',
   data () {
     return {
-        activityId: this.$route.params.activityId,
+        registrateId: this.$route.params.registrateId,
+        registrate:{}
     }
   },
   methods:{
     back(){
       location.hash = '/join';
+    },
+    vote(){
+      this.$http.post("/api/registrate/votes",{
+          "activeId":1,
+          "activeRegistrateId":this.registrateId,
+          "sourceUser":Vue.prototype.$sourceUserToken, // TODO
+          "voteUser":Vue.prototype.$userToken, //TODO
+      }).then((res)=>{
+          if(res.data.code == '100063'){
+            alert('当天超过投票次数,限制每天三次,同一个作品每天一次');
+          } else {
+            alert("投票成功");// TODO
+            this.registrate.votes++;// TODO
+          }
+      })
     }
+
   },
   mounted:function(){
-    
-  
-  }
+        this.$http.post("/api/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+            if(res.data.code != '000000'){
+              alert(this.registrateId + "不存在")
+            } else {
+              this.registrate = res.data.data;
+            }
+        })
+        Vue.prototype.$detailId=this.registrateId;
+        Vue.prototype.$link = "http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&detailId="+Vue.prototype.$detailId + "&sourceUserToken="+ Vue.prototype.$detailId;
+  },
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -78,7 +102,7 @@ export default {
       left: 50%;
       bottom: pxTorem(120px);
       height:pxTorem(160px) ;
-      width:pxTorem(633px) ; 
+      width:pxTorem(633px) ;
       margin-left: pxTorem(-316.5px);
     }
     .detail_btn1,.detail_btn2{

@@ -27,12 +27,12 @@ export default new Router({
       component: Join
     },
     {
-      path: '/Detail',
+      path: '/Detail/:registrateId',
       name: 'Detail',
       component: Detail
     },
     {
-      path: '/Canvassing',
+      path: '/Canvassing/:registrateId',
       name: 'Canvassing',
       component: Canvassing
     },
