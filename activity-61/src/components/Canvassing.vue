@@ -4,8 +4,9 @@
     <div class="number">
       您的编号为{{registrate.formatId}}号
     </div>
-    <div class="canvassing_pic">
+    <div class="canvassing_pic" >
          <img :src="image.picUrl" v-for="image in registrate.activeUserPicDtos"/>
+
     </div>
     <div class="btn_box">
       <div class="canvassing_btn1" @click="getMask">
@@ -86,10 +87,15 @@ export default {
       position: absolute;
       width: pxTorem(630px);
       height:pxTorem(840px);
-      background:red;
+      background:#cacaca;
       margin-left: pxTorem(-315px);
       top:  pxTorem(190px);
       left: 50%;
+      background-size:100%; 
+      overflow: hidden;
+      img{
+        width:20%;
+      }
     }
     .canvassing_pic img{
       width:100%;

@@ -10,7 +10,7 @@ $font-size-base:75px;
 }
 	.rule{
 		background:  url("../assets/rule_bg.jpg") no-repeat center;
-		height:pxTorem(1218px) ;
+		height:pxTorem(1334px);
 		width:pxTorem(750px) ;
 		background-size: 100%;
 	}
