@@ -182,10 +182,10 @@
   top: 4rem;
   left: 2.67rem;
   overflow: hidden;
-  .send_pictice{
-    width:100%;
-    height:100%;
-  }
+}
+..Photo{
+  width:100%;
+  height:100%;
 }
 /* input框 */
 .join input{
