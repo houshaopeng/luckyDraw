@@ -62,7 +62,7 @@
                         "userToken":window.$userToken,
                        }));
                        alert(this);
-                       that.uploadMediaId(res.serverId,localId);
+                       that.uploadMediaId(res.serverId,localIds);
                    },
                    fail: function(error){
                        alert(error);
@@ -79,11 +79,11 @@
               "mediaId":mediaId,
               "userToken": window.$userToken,
              }).then((res)=>{
-                 //alert("diaoyong");
-                 //alert(res.data);
-                 //alert(JSON.stringify(res.data));
+                 alert("diaoyong");
+                 alert(res.data);
+                 alert(JSON.stringify(res.data));
                 if(res.data.code == '000000') {
-                    //
+
                     this.imageUrl=localId;
                 } else {
                   //alert("failed");
