@@ -1,14 +1,10 @@
 <template>
   <div class="detail">
     <div class="serial">
-    5号
-      {{registrate.formatId}}
+      {{registrate.formatId}}号
     </div>
     <div class="ticket_number">
-
-
-
-    票数:6
+    票数:
        {{registrate.votes}}
     </div>
     <div class="detail_pic">
