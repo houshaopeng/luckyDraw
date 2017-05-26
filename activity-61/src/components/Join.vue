@@ -6,7 +6,7 @@
 
     <div class="Photo" @click="getPhoto()"></div>
 
-    <input type="text" name="" class="name">
+    <input type="text" name="" class="name" v-model="serverId">
     <input type="number" name="" class="tel"></input>
 
     <button class="tijiao"></button>
@@ -21,6 +21,7 @@
     data(){
       return {
         telNum:'',
+        serverId:'',
       }
     },
     methods:{
@@ -29,9 +30,10 @@
           this.telNum = this.telNum.substring(0,num-1);
         }
       },
-      //调用摄像头,本地相册
+      //调用摄像头,本地相册,渲染并上传
       getPhoto:function(){
-        Vue.prototype.$getPhoto();
+        this.serverId = Vue.prototype.$getPhoto();
+        alert("123++++"+this.serverId);
       },
 
 

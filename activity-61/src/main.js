@@ -44,7 +44,7 @@ console.log(Vue.prototype.$nickName+"---"+Vue.prototype.$userToken+"---"+Vue.pro
 var pageShareData = {
   'title':'最美宝宝评选啦',
   'desc':'拉好友投票，提升名次，赢取奖品',
-  'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&acitivyId="+Vue.prototype.$acitivityId,
+  'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&acitivyId="+Vue.prototype.$detailId,
   'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
 }
 var getSignParam = {
@@ -180,31 +180,7 @@ Vue.prototype.$getPhoto = function(){
                success: function (res) {
                    var serverId = res.serverId; // 返回图片的服务器端ID
                    alert("返回在服务器上的地址serverId===" + serverId);
-                   //TODO upload file
-
-
-                   // upload file
-                   // wx.downloadImage({
-                   //     serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                   //     isShowProgressTips: 1, // 默认为1，显示进度提示
-                   //     success: function (res) {
-
-                   //         var localId = res.localId; // 返回图片下载后的本地ID
-                   //         alert("下载在本地后的localId" + localId);
-                   //         wx.getLocalImgData({
-                   //             localId: localId, // 图片的localID
-                   //             success: function (res) {
-                   //                 var localData = res.localData;
-                   //                 alert("得到本地的图片bese64" + localData);
-                   //             },
-                   //             fail: function(error){
-                   //                 alert(error);
-                   //                 alert(JSON.stringify(error));
-                   //             }
-                   //         });
-                   //     }
-                   // });
-
+                   return serverId;
                },
                fail: function(error){
                    alert(error);
