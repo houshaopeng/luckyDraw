@@ -56,6 +56,7 @@ export default {
             }
         })
         window.$detailId=this.registrateId;
+        window.getWxJsToken();
 
   }
 }

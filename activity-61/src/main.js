@@ -36,6 +36,7 @@ window.$nickName = decodeURI(GetRequest('nickname'));
 window.$userToken = (GetRequest('userToken') == undefined ? "asdfasdf": GetRequest('userToken'));
 window.$gameId = GetRequest('gameId');
 window.$sourceUserToken = GetRequest('sourceUserToken');
+console.log(window.$nickName+"---"+window.$userToken+"---"+window.$gameId+"---"+window.$sourceUserToken)
 
 // TODO youmeiyou rizhi zujian lai kongzhi
 
@@ -63,7 +64,7 @@ var getSignParam = {
 var getSignUrl = '/weiXin/getSign';
 var isDebug = false;
 
-var getWxJsToken = function () {  // 获取微信签名验证，得到config
+window.getWxJsToken = function () {  // 获取微信签名验证，得到config
     var saveData = JSON.stringify(getSignParam);
     $.ajax({
         url: "/game-app"+ getSignUrl,
@@ -166,9 +167,9 @@ var wxConfig = function (conf) {
         console.log('error',res);
     });
 }
-window.onload = function(){
-    getWxJsToken();
-}
+// window.onload = function(){
+//     getWxJsToken();
+// }
 /*提供一个全局方法，用来开启摄像头*/
 /*pageShareData().getPhoto = function(){
     alert("调用摄像头开始");

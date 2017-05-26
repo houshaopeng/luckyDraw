@@ -127,6 +127,7 @@ export default {
     // this.picticeList();
     this.initPrize();
     this.initRegistrate();
+    window.getWxJsToken();
   }
 }
 </script>

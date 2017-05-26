@@ -115,7 +115,7 @@
       //TODO,在这里拿到全局的activityID,这个是唯一的。
     },
     mounted:function(){
-
+      window.getWxJsToken();
     }
   }
 </script>

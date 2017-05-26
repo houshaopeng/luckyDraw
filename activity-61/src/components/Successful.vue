@@ -31,7 +31,11 @@
 			func: function() {
 				location.hash = '/join';
 			}
-		}
+		},
+	    mounted:function(){
+	      window.getWxJsToken();
+	    }
+
 	}
 </script>
 
