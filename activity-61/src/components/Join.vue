@@ -54,6 +54,12 @@
                    success: function (res) {
                        var serverId = res.serverId; // 返回图片的服务器端ID
                        alert("返回在服务器上的地址serverId===!!!" + serverId);
+                       alert(JSON.stringify({
+                        "acitveName":1,
+                        "fileType":"png",
+                        "mediaId":res.serverId,
+                        "userToken":window.$userToken,
+                       }));
                        this.$http.post("/game-app/file/upload",{
                         "acitveName":1,
                         "fileType":"png",
