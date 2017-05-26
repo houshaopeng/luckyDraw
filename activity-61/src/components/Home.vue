@@ -34,11 +34,11 @@
               <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
           </div>
           <div class="headPortrait">
-
+            <img :src="item.headUrl" />
           </div>
           <p class="name">{{item.name}}</p>
           <p class="ticket">{{item.votes}}票</p>
-          <div class="vote_btn">
+          <div class="vote_btn" @click="getDetail(item.id)">
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@ export default {
         this.registrates = res.data.registrateDtoList;
         this.bannerScroll();
       })
-    }
+    },
 
   },
 
@@ -236,8 +236,13 @@ export default {
 
           margin: pxTorem(-30px)  pxTorem(10px) 0 pxTorem(20px);
           border-radius: 50%;
-          background: red  url("../assets/logo.png") no-repeat center;
+          /* background: red  url("../assets/logo.png") no-repeat center; */
           background-size: 100%;
+          overflow:hidden;
+        }
+        .headPortrait img{
+          width:100%;
+          height:100%;
         }
         .name{
           text-align: left;

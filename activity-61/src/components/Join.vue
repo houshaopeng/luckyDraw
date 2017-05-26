@@ -4,6 +4,7 @@
     <span class="tikNum">{{metrix.totalVotesTime}}</span>
     <span class="openNUm">{{metrix.totalPageViews}}</span>
 
+
     <div class="Photo" @click="getPhoto()"></div>
     <img :src="imageUrl"/>
     <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
@@ -22,7 +23,6 @@
       return {
         telNum:'',
         userName:'',
-        getserverId:'',
         metrix:{
         },
         imageUrl:'',
@@ -61,8 +61,7 @@
                         "mediaId":res.serverId,
                         "userToken":window.$userToken,
                        }));
-                       alert(this);
-                       that.uploadMediaId(res.serverId,localIds);
+                       that.uploadMediaId(serverId,localIds);
                    },
                    fail: function(error){
                        alert(error);
@@ -80,10 +79,9 @@
               "userToken": window.$userToken,
              }).then((res)=>{
                  alert("diaoyong");
-                 alert(res.data);
                  alert(JSON.stringify(res.data));
                 if(res.data.code == '000000') {
-                    alert("上传成功");
+                    alert("上传后台成功，可以渲染");
                     this.imageUrl=localId;//渲染上去
                     this.fileUrl=res.data.fileInfo.fileUrl;
                     alert(this.fileUrl);
@@ -91,7 +89,7 @@
                   //alert("failed");
                 }
              },(error)=>{
-                alert(error);
+                alert("上传后台失败");
                 alert(JSON.stringify(error));
              })
       },
@@ -117,11 +115,11 @@
             // todo
             location.hash = '/Canvassing/'+res.data.data.id;
           } else {
-            alert("错误信息");
+            alert("错误信息"+JSON.stringify(res.data));
           }
         },(error)=>{
                 alert(JSON.stringify(error));
-             })
+          })
       }
 
 
@@ -175,6 +173,10 @@
   position:absolute;
   top: 4rem;
   left: 2.67rem;
+}
+.Photo img{
+  width:100%;
+  height:100%;
 }
 /* input框 */
 .join input{
