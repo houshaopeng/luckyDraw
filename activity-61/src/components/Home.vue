@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="topPage">
-      <p @click="func" class="join_btn"></p>
+      <p @click="signUp" class="join_btn"></p>
       <p class="rule_btn"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
@@ -131,6 +131,25 @@ export default {
     }
   },
   methods:{
+    // 我要报名
+    signUp(){
+      this.$http.post(
+        // "http://shanlingame.oneforce.cn/game-app/registrate",
+        "/registrate",
+        {
+          "activeId":"1",
+          "declaration":"12",
+          "mobileNo":"12345678911",
+          "name":"123",
+          "picUrl":"1",
+          "userToken":"123",
+        },
+        ).then((res)=>{
+          console.log(res)
+        },(res)=>{
+          console.log("error")
+        })
+    },
     func:function(){
       location.hash = '/join/'+Vue.prototype.$userToken;
     },

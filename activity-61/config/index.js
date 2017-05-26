@@ -27,7 +27,14 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        "/game-app": {
+            target:'http://shanlingame.oneforce.cn',
+            // target:'http://10.1.16.120:8082',
+            changeOrigin: true,
+            pathRewrite: {'^/game-app' : '/'},
+        },  
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
