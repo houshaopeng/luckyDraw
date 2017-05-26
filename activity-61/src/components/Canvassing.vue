@@ -91,7 +91,7 @@ export default {
       margin-left: pxTorem(-315px);
       top:  pxTorem(190px);
       left: 50%;
-      background-size:100%; 
+      background-size:100%;
       overflow: hidden;
       img{
         width:20%;
@@ -104,7 +104,7 @@ export default {
     .btn_box{
       position: absolute;
       left: 50%;
-      bottom: pxTorem(120px);
+      bottom: pxTorem(50px);
       height:pxTorem(160px) ;
       width:pxTorem(633px) ;
       margin-left: pxTorem(-316.5px);
