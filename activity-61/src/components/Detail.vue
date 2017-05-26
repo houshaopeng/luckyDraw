@@ -52,7 +52,7 @@ export default {
     }
 
   },
-  create:function(){
+  mounted:function(){
         this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
               alert(this.registrateId + "不存在")
