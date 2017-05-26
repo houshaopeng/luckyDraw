@@ -26,7 +26,7 @@
     </div>
     <div class="production">
     <div class="production_head">
-      <input type="text" class="search" placeholder="请输入编号" v-model="registrateId">
+      <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
       <div class="search_btn" @click="findRegistrate" ></div>
     </div>
 
