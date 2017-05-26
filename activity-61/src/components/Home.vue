@@ -32,7 +32,7 @@
               <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
           </div>
           <div class="headPortrait">
-            <img src="item.headUrl" />
+            <img :src="item.headUrl" />
           </div>
           <p class="name">{{item.name}}</p>
           <p class="ticket">{{item.votes}}票</p>
