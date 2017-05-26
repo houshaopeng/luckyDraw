@@ -49,8 +49,9 @@
                    isShowProgressTips: 1, // 默认为1，显示进度提示
                    success: function (res) {
                        var serverId = res.serverId; // 返回图片的服务器端ID
-                       alert("返回在服务器上的地址serverId===" + serverId);
+                       alert("返回在服务器上的地址serverId===!!!" + serverId);
                        this.getserverId = serverId;
+                       window.location.href="http://shanlingame.oneforce.cn/activity-61/index.html?"+res.serverId
 
 
                    },
