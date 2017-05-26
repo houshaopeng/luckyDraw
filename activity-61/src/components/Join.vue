@@ -39,6 +39,7 @@
         //this.serverId = Vue.prototype.$getPhoto();
         //alert("123++++"+this.serverId);
         alert("调用摄像头开始");
+        var that = this;
         wx.chooseImage({
            count: 1, // 默认9
            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -60,28 +61,8 @@
                         "mediaId":res.serverId,
                         "userToken":window.$userToken,
                        }));
-                       this.$http.post("/game-app/file/upload",{
-                        "acitveName":1,
-                        "fileType":"png",
-                        "mediaId":res.serverId,
-                        "userToken":window.$userToken,
-                       }).then((res)=>{
-                           alert("diaoyong");
-                           alert(res.data);
-                           alert(JSON.stringify(res.data));
-                          if(res.data.code == '000000') {
-                              //
-                              this.imageUrl=localIds[0]
-                          } else {
-                            alert("failed");
-                          }
-                       },(error)=>{
-                          alert(error);
-                          alert(JSON.stringify(error));
-                       })
-
-
-
+                       alert(this);
+                       that.uploadMediaId(res.serverId);
                    },
                    fail: function(error){
                        alert(error);
@@ -91,7 +72,27 @@
            }
         });
       },
-
+      uploadMediaId(mediaId){
+        this.$http.post("/game-app/file/upload",{
+              "acitveName":"1",
+              "fileType":"png",
+              "mediaId":mediaId,
+              "userToken": window.$userToken,
+             }).then((res)=>{
+                 alert("diaoyong");
+                 alert(res.data);
+                 alert(JSON.stringify(res.data));
+                if(res.data.code == '000000') {
+                    //
+                    this.imageUrl=localIds[0]
+                } else {
+                  alert("failed");
+                }
+             },(error)=>{
+                alert(error);
+                alert(JSON.stringify(error));
+             })
+      },
       submitInfo(){
         this.$http.post("/game-app/registrate",{
           "activeId":1,// TODO
