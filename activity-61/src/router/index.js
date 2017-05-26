@@ -23,7 +23,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Join',
+      path: '/Join/:joinId',
       name: 'Join',
       component: Join
     },

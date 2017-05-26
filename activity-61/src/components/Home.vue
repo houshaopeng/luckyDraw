@@ -132,7 +132,7 @@ export default {
   },
   methods:{
     func:function(){
-      location.hash = '/join';
+      location.hash = '/join/1111';
     },
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
