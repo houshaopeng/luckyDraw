@@ -84,7 +84,7 @@
                  alert(JSON.stringify(res.data));
                 if(res.data.code == '000000') {
 
-                    this.imageUrl=localId;
+                    this.imageUrl=res.data.fileInfo.fileUrl;
                 } else {
                   //alert("failed");
                 }
@@ -100,7 +100,7 @@
           "mobileNo":this.telNum,
           "name":this.userName,
           "userToken":Vue.prototype.$userToken, // TODO
-          "picUrl":this.imageUrl[0]
+          "picUrl":this.imageUrl
         }))
 
         this.$http.post("/game-app/registrate",{
