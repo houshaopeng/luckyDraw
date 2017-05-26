@@ -18,18 +18,18 @@
                 <img :src="item.prizePicUrl" alt="">
                 <p>{{item.name}}</p>
               </div>
-            </div>    
+            </div>
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
-      </div> 
+      </div>
     </div>
     <div class="production">
     <div class="production_head">
-      <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
-      <div class="search_btn"></div>
+      <input type="text" class="search" placeholder="请输入编号" v-model="registrateId">
+      <div class="search_btn" @click="findRegistrate"></div>
     </div>
-      
+
       <div class="pictice_box">
         <div class="pictice" v-for="item in registrates">
           <h3>{{item.formatId}}号</h3>
@@ -99,7 +99,7 @@ export default {
     findRegistrate(){
         this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
-              alert(this.registrateId + "不存在")
+              alert("该编号不存在")
             } else {
               location.hash='/Detail/'+this.registrateId;
             }
@@ -130,7 +130,7 @@ export default {
   mounted:function(){
 
     // this.queryActive();    //活动查询接口
-    
+
     // this.picticeList();
     this.initPrize();
     this.initRegistrate();
@@ -217,11 +217,11 @@ export default {
         z-index: 10;
       }
     }
-    
+
     .pictice_box{
       width: pxTorem(750px) ;
       background:url("../assets/all_show_body.jpg") ;
-      background-size:100%; 
+      background-size:100%;
       background-repeat: repeat;
       margin-top: pxTorem(-2px);
       height:pxTorem(2930px) ;
@@ -245,7 +245,7 @@ export default {
           overflow: hidden;
           img{
             width: 100%;
-           
+
           }
         }
         .headPortrait{

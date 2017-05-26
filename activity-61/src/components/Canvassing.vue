@@ -4,7 +4,7 @@
     <div class="number">
       您的编号为{{registrate.formatId}}号
     </div>
-    <div class="canvassing_pic" >
+    <div class="canvassing_pic">
          <img :src="image.picUrl" v-for="image in registrate.activeUserPicDtos"/>
 
     </div>
@@ -93,9 +93,6 @@ export default {
       left: 50%;
       background-size:100%;
       overflow: hidden;
-      img{
-        width:20%;
-      }
     }
     .canvassing_pic img{
       width:100%;
