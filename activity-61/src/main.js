@@ -49,7 +49,7 @@ var pageShareData = function(){
     'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + window.$userToken +"&detailId="+window.$detailId + "&sourceUserToken="+ window.$sourceUserToken,
     'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
   }
-  alert(JSON.stringify(a));
+  // alert(JSON.stringify(a));
   return a;
 }
 

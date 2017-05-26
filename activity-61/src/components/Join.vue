@@ -62,7 +62,7 @@
                         "userToken":window.$userToken,
                        }));
                        alert(this);
-                       that.uploadMediaId(res.serverId);
+                       that.uploadMediaId(res.serverId,localId);
                    },
                    fail: function(error){
                        alert(error);
@@ -72,25 +72,25 @@
            }
         });
       },
-      uploadMediaId(mediaId){
+      uploadMediaId(mediaId,localId){
         this.$http.post("/game-app/file/upload",{
               "acitveName":"1",
               "fileType":"png",
               "mediaId":mediaId,
               "userToken": window.$userToken,
              }).then((res)=>{
-                 alert("diaoyong");
-                 alert(res.data);
-                 alert(JSON.stringify(res.data));
+                 //alert("diaoyong");
+                 //alert(res.data);
+                 //alert(JSON.stringify(res.data));
                 if(res.data.code == '000000') {
                     //
-                    this.imageUrl=localIds[0]
+                    this.imageUrl=localId;
                 } else {
-                  alert("failed");
+                  //alert("failed");
                 }
              },(error)=>{
                 alert(error);
-                alert(JSON.stringify(error));
+                (JSON.stringify(error));
              })
       },
       submitInfo(){
@@ -102,7 +102,7 @@
           "picUrl":this.imageUrl
       }).then((res)=>{
           if(res.data.code === '000000'){
-            alert("chengong");
+            //alert("chengong");
             // todo
             location.hash = '/Canvassing/'+res.data.data.id;
           } else {
