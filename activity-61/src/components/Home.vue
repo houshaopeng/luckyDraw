@@ -1,11 +1,8 @@
 <template>
   <div class="home">
     <div class="topPage">
-
       <p @click="signUp" class="join_btn"></p>
-
       <p class="rule_btn" @click="getRule"></p>
-
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -137,10 +134,10 @@ export default {
     // 我要报名
     signUp(){
       //location.hash = '/join/'+Vue.prototype.$userToken;
-      location.hash = '/join/' ;
+      // location.hash = '/join/' ;
       this.$http.post(
         // "http://shanlingame.oneforce.cn/game-app/registrate",
-        "/registrate",
+        "/api/registrate",
         {
           "activeId":"1",
           "declaration":"12",
@@ -149,12 +146,32 @@ export default {
           "picUrl":"1",
           "userToken":"123",
         },
-        ).then((res)=>{
-          console.log(res)
-        },(res)=>{
-          console.log("error")
-        })
+      ).then((res)=>{
+        this.$router.push({  path: '/join'  });
+      },(res)=>{
+        alert("error")
+      })
     },
+    
+    picticeList(){
+      this.$http.post(
+        // "http://shanlingame.oneforce.cn/game-app/registrate",
+        "/api/seacherRegistrate",
+        {
+          // "userToken":"123",
+          "direction":false,
+          "id":"1",
+          "pageNum":"2",
+          "pageSize":"10",
+          "sortName":"createdAt",
+        },
+      ).then((res)=>{
+        console.log(res);
+      },(res)=>{
+        alert("error")
+      })
+    },
+    // 轮播滚动
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
         autoplay: 2000,//可选选项，自动滑
@@ -194,8 +211,9 @@ export default {
   },
   mounted:function(){
 
-    this.queryActive();//活动查询接口
+    this.queryActive();    //活动查询接口
     this.bannerScroll();
+    this.picticeList();
   }
 }
 </script>
