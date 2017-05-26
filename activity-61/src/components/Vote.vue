@@ -22,14 +22,18 @@
 		name: 'vote',
 		data() {
 			return {
-
+				activityId: this.$route.params.activityId,
 			}
 		},
 		methods: {
 			func: function() {
 				location.hash = '/join';
 			}
+
 		}
+		/*create: function(){
+			this.$http.get("",{activityId:this.activityId}),
+		}*/
 	}
 </script>
 

@@ -7,7 +7,7 @@ import vueResource from 'vue-resource'
 Vue.use(vueResource)
 Vue.config.productionTip = false
 
-
+// TODO laji daima
 
 /*公共方法*/
 var GetRequest = function(key){
@@ -33,6 +33,7 @@ Vue.prototype.$nickName = decodeURI(GetRequest('nickname'));
 Vue.prototype.$userToken = GetRequest('userToken');
 Vue.prototype.$gameId = GetRequest('gameId');
 
+// TODO youmeiyou rizhi zujian lai kongzhi
 console.log(Vue.prototype.$nickName+"---"+Vue.prototype.$userToken+"---"+Vue.prototype.$gameId);
 
 
@@ -40,7 +41,7 @@ console.log(Vue.prototype.$nickName+"---"+Vue.prototype.$userToken+"---"+Vue.pro
 var pageShareData = {
   'title':'最美宝宝评选啦',
   'desc':'拉好友投票，提升名次，赢取奖品',
-  'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken,
+  'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + Vue.prototype.$userToken +"&acitivyId="+Vue.prototype.$acitivityId,
   'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
 }
 var getSignParam = {
@@ -200,6 +201,7 @@ Vue.prototype.$getPhoto = function(){
                    //         });
                    //     }
                    // });
+
                },
                fail: function(error){
                    alert(error);

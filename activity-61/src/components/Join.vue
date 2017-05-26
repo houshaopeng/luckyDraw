@@ -21,7 +21,6 @@
     data(){
       return {
         telNum:'',
-
       }
     },
     methods:{
@@ -32,12 +31,13 @@
       },
       //调用摄像头,本地相册
       getPhoto:function(){
-        alert(1);
-        alert(this.$route);
-        alert(this.$route.params);
-        alert(this.$route.params.joinId);
         Vue.prototype.$getPhoto();
       },
+
+
+
+
+      //TODO,在这里拿到全局的activityID,这个是唯一的。
     },
     mounted:function(){
 
