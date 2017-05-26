@@ -113,7 +113,7 @@
             // todo
             location.hash = '/Canvassing/'+res.data.data.id;
           } else {
-            alert("错误信息"+res.data);
+            alert("错误信息"+JSON.stringify(res.data));
           }
         },(error)=>{
                 alert(JSON.stringify(error));
