@@ -36,7 +36,7 @@
       getPhoto:function(){
         //this.serverId = Vue.prototype.$getPhoto();
         //alert("123++++"+this.serverId);
-        alert("调用摄像头开始");
+        //alert("调用摄像头开始");
         var that = this;
         wx.chooseImage({
            count: 1, // 默认9
@@ -46,24 +46,24 @@
 
                var localIds = res.localIds[0].toString(); //
                localIds = res.localIds;
-               alert("返回图片本地IDlocalIds===!!!" + localIds);
+               //alert("返回图片本地IDlocalIds===!!!" + localIds);
                wx.uploadImage({
                    localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
                    isShowProgressTips: 1, // 默认为1，显示进度提示
                    success: function (res) {
                        var serverId = res.serverId; // 返回图片的服务器端ID
-                       alert("返回在服务器上的地址serverId===!!!" + serverId);
-                       alert(JSON.stringify({
+                       //alert("返回在服务器上的地址serverId===!!!" + serverId);
+                       /*alert(JSON.stringify({
                         "acitveName":1,
                         "fileType":"png",
                         "mediaId":res.serverId,
                         "userToken":window.$userToken,
-                       }));
+                       }));*/
                        that.uploadMediaId(serverId,localIds);
                    },
                    fail: function(error){
-                       alert(error);
-                       alert(JSON.stringify(error));
+                       //alert(JSON.stringify(error));
+                       alert("图片上传失败，稍后重试")
                    }
                });
            }
@@ -76,30 +76,31 @@
               "mediaId":mediaId,
               "userToken": window.$userToken,
              }).then((res)=>{
-                 alert("diaoyong");
-                 alert(JSON.stringify(res.data));
+                 //alert("diaoyong");
+                 //alert(JSON.stringify(res.data));
                 if(res.data.code == '000000') {
-                    alert("上传后台成功，可以渲染");
+                    //alert("上传后台成功，可以渲染");
                     this.imageUrl=localId;//渲染上去
                     this.fileUrl=res.data.fileInfo.fileUrl;
-                    alert(this.fileUrl);
+                    //alert(this.fileUrl);
                 } else {
                   //alert("failed");
                 }
              },(error)=>{
-                alert("上传后台失败");
-                alert(JSON.stringify(error));
+                alert("服务器正忙,稍后重试");
+                //alert("上传后台失败,稍后重试");
+                //alert(JSON.stringify(error));
              })
       },
       submitInfo(){
-        alert("确认提交了")
-        alert(JSON.stringify({
+        //alert("确认提交了")
+        /*alert(JSON.stringify({
           "activeId":1,// TODO
           "mobileNo":this.telNum,
           "name":this.userName,
           "userToken":window.$userToken, // TODO
           "picUrl":this.fileUrl
-        }))
+        }))*/
 
         this.$http.post("/game-app/registrate",{
           "activeId":1,// TODO
@@ -113,10 +114,10 @@
             // todo
             location.hash = '/Canvassing/'+res.data.data.id;
           } else {
-            alert("错误信息"+JSON.stringify(res.data));
+            alert(res.data.message);
           }
         },(error)=>{
-                alert(JSON.stringify(error));
+                //alert(JSON.stringify(error));
           })
       }
 
