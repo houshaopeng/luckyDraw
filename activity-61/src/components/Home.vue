@@ -27,7 +27,7 @@
     <div class="production">
     <div class="production_head">
       <input type="text" class="search" placeholder="请输入编号" v-model="registrateId">
-      <div class="search_btn" @click="findRegistrate"></div>
+      <div class="search_btn" @click="findRegistrate" ></div>
     </div>
 
       <div class="pictice_box">
@@ -209,8 +209,8 @@ export default {
         width: pxTorem(460px) ;
       }
       .search_btn{
-        height:pxTorem(50px) ;
-        width:pxTorem(60px) ;
+        height:pxTorem(100px) ;
+        width:pxTorem(100px) ;
         position: absolute;
         left: pxTorem(96px);
         bottom:pxTorem(-188px);
