@@ -101,7 +101,7 @@ export default {
     .btn_box{
       position: absolute;
       left: 50%;
-      bottom: pxTorem(50px);
+      bottom: pxTorem(20px);
       height:pxTorem(160px) ;
       width:pxTorem(633px) ;
       margin-left: pxTorem(-316.5px);
