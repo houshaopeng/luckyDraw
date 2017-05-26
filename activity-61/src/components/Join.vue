@@ -100,7 +100,7 @@
           "mobileNo":this.telNum,
           "name":this.userName,
           "userToken":Vue.prototype.$userToken, // TODO
-          "picUrl":this.imageUrl
+          "picUrl":this.imageUrl[0]
         }))
 
         this.$http.post("/game-app/registrate",{
