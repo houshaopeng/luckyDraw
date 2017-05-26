@@ -95,6 +95,14 @@
       },
       submitInfo(){
         alert("确认提交了")
+        alert(JSON.stringify({
+          "activeId":1,// TODO
+          "mobileNo":this.telNum,
+          "name":this.userName,
+          "userToken":Vue.prototype.$userToken, // TODO
+          "picUrl":this.imageUrl
+      }))
+
         this.$http.post("/game-app/registrate",{
           "activeId":1,// TODO
           "mobileNo":this.telNum,
