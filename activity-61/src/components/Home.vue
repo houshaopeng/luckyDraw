@@ -136,7 +136,7 @@ export default {
     },
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
-       autoplay: 2000,//可选选项，自动滑动
+        autoplay: 2000,//可选选项，自动滑动
         prevButton:'.swiper-button-prev',
         nextButton:'.swiper-button-next',
       })
@@ -226,7 +226,7 @@ export default {
     width:pxTorem(750px) ;
     background-size: 100%;
     .search{
-      margin: pxTorem(160px) pxTorem(160px) 0;
+      margin: pxTorem(160px) 0  0 pxTorem(160px) ;
       border: none;
       width: pxTorem(460px) ;
     }
@@ -234,6 +234,7 @@ export default {
       height:  pxTorem(1730px) ;
       width: pxTorem(750px) ;
       margin-top: pxTorem(80px) ;
+      background:red; 
       .pictice{
         float: left;
         width: pxTorem(336px);
