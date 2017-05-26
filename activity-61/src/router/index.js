@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Join from '@/components/Join'
-import Vote from '@/components/Vote'
 import Detail from '@/components/Detail'
 import Canvassing from '@/components/Canvassing'
 import Rule from '@/components/Rule'
@@ -26,11 +25,6 @@ export default new Router({
       path: '/Join',
       name: 'Join',
       component: Join
-    },
-    {
-      path: '/Vote/:activityId',
-      name: 'Vote',
-      component: Vote
     },
     {
       path: '/Detail',

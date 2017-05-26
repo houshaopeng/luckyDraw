@@ -26,13 +26,13 @@ export default {
   name: 'home',
   data () {
     return {
-
+        activityId: this.$route.params.activityId,
     }
   },
   methods:{
-    
-    
-
+    back(){
+      location.hash = '/join';
+    }
   },
   mounted:function(){
     

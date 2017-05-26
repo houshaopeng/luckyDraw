@@ -1,6 +1,6 @@
 <template>
   <div class="canvassing">
-   
+
     <div class="number">
       您的编号为1813号
     </div>
@@ -8,15 +8,15 @@
 
     </div>
     <div class="btn_box">
-      <div class="canvassing_btn1">
-        
+      <div class="canvassing_btn1" @click="getMask">
+
       </div>
-      <div class="canvassing_btn2">
-        
+      <div class="canvassing_btn2" @click="backHome">
+
       </div>
     </div>
-    <div class="mask">
-      
+    <div class="mask" v-show="isMask" @click="dispearMask">
+
     </div>
   </div>
 </template>
@@ -26,17 +26,27 @@ export default {
   name: 'home',
   data () {
     return {
-
+      isMask : false,
     }
   },
   methods:{
-    
-    
+    /*弹出层消失*/
+    dispearMask(){
+      this.isMask = false;
+    },
+    /*拉票*/
+    getMask(){
+      this.isMask = true;
+    },
+    /*回到首页*/
+    backHome(){
+      location.hash = 'Home';
+    },
 
   },
   mounted:function(){
-    
-  
+
+
   }
 }
 </script>
@@ -56,7 +66,7 @@ export default {
     padding-top: pxTorem(105px) ;
     font-size: pxTorem(42px) ;
     text-align: center;
-   
+
     .number{
       height:pxTorem(50px) ;
       width:pxTorem(750px) ;
@@ -75,7 +85,7 @@ export default {
       left: 50%;
       bottom: pxTorem(120px);
       height:pxTorem(160px) ;
-      width:pxTorem(633px) ; 
+      width:pxTorem(633px) ;
       margin-left: pxTorem(-316.5px);
     }
     .canvassing_btn1,.canvassing_btn2{
