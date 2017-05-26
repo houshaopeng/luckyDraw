@@ -36,7 +36,7 @@
           </div>
           <p class="name">{{item.name}}</p>
           <p class="ticket">{{item.votes}}票</p>
-          <div class="vote_btn">
+          <div class="vote_btn" @click="getDetail(item.id)">
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default {
       }).then((res)=>{
         this.registrates = res.data.registrateDtoList;
       })
-    }
+    },
 
   },
 
