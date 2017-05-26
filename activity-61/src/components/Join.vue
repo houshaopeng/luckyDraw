@@ -90,7 +90,7 @@
                 }
              },(error)=>{
                 alert(error);
-                (JSON.stringify(error));
+                alert(JSON.stringify(error));
              })
       },
       submitInfo(){
@@ -118,8 +118,7 @@
             alert("错误信息");
           }
         },(error)=>{
-                alert(error);
-                (JSON.stringify(error));
+                alert(JSON.stringify(error));
              })
       }
 
