@@ -61,15 +61,33 @@
                     wx.getLocalImgData({
                         localId: localIds[0], // 图片的localID
                         success: function (res) {
-                            alert(res);
-                            alert(JSON.stringify(res));
-                            alert((res.localData));
-                            alert(JSON.stringify(res.localData));
-                            that.imageUrl = res.localData; // localData是图片的base64数据，可以用img标签显示
+                            //that.imageUrl = res.localData; // localData是图片的base64数据，可以用img标签显示
+                            var base64 = res.localData;
+                            this.$http.post("/game-app/file/uploadIosFile",{
+                                  "acitveName":"1",
+                                  "fileType":"png",
+                                  "file" : base64
+                                 }).then((res)=>{
+                                     //alert("diaoyong");
+                                     //alert(JSON.stringify(res.data));
+                                    if(res.data.code == '000000') {
+                                        //alert("上传后台成功，可以渲染");
+                                        /*this.imageUrl=localId;//渲染上去
+                                        this.fileUrl=res.data.fileInfo.fileUrl;*/
+                                        //alert(this.fileUrl);
+                                        that.imageUrl = base64;
+                                    } else {
+                                      alert("服务器正忙,稍后重试");
+                                    }
+                                 },(error)=>{
+                                    alert("服务器正忙,稍后重试");
+                                    //alert("上传后台失败,稍后重试");
+                                    //alert(JSON.stringify(error));
+                                 })
+
                         },
                         fail: function(error){
-                          alert(error);
-                          alert(JSON.stringify(error));
+                          alert("图片上传失败，稍后重试");
                         }
                     });
                   }else{
