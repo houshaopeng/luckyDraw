@@ -2,7 +2,7 @@
   <div class="canvassing">
     <!-- <div class="back_home" @click="backHome"> -->
 
-    </div>
+    <!-- </div> -->
     <div class="number">
       您的编号为{{registrate.formatId}}号
     </div>
