@@ -25,7 +25,7 @@
     data(){
       return {
         telNum:'',
-        userName:'',
+        userName:window.$nickName,
         metrix:{
         },
         imageUrl:'',
@@ -53,26 +53,40 @@
            success: function (res) {
                var localIds = res.localIds[0].toString(); //
                localIds = res.localIds;
-               //alert("返回图片本地IDlocalIds===!!!" + localIds);
-               wx.uploadImage({
-                   localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
-                   isShowProgressTips: 1, // 默认为1，显示进度提示
-                   success: function (res) {
-                       var serverId = res.serverId; // 返回图片的服务器端ID
-                       //alert("返回在服务器上的地址serverId===!!!" + serverId);
-                       /*alert(JSON.stringify({
-                        "acitveName":1,
-                        "fileType":"png",
-                        "mediaId":res.serverId,
-                        "userToken":window.$userToken,
-                       }));*/
-                       that.uploadMediaId(serverId,localIds);
-                   },
-                   fail: function(error){
-                       //alert(JSON.stringify(error));
-                       alert("图片上传失败，稍后重试")
-                   }
-               });
+                  if(isIosSep){
+                    wx.getLocalImgData({
+                        localId: res.localIds[0], // 图片的localID
+                        success: function (res) {
+                            alert(res);
+                            alert(JSON.stringify(res));
+                            alert((res.localData));
+                            alert(JSON.stringify(res.localData));
+                            that.imageUrl = res.localData; // localData是图片的base64数据，可以用img标签显示
+                        }
+                    });
+                  }else{
+                     wx.uploadImage({
+
+                         localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                         isShowProgressTips: 1, // 默认为1，显示进度提示
+                         success: function (res) {
+                             var serverId = res.serverId; // 返回图片的服务器端ID
+                             //alert("返回在服务器上的地址serverId===!!!" + serverId);
+                             /*alert(JSON.stringify({
+                              "acitveName":1,
+                              "fileType":"png",
+                              "mediaId":res.serverId,
+                              "userToken":window.$userToken,
+                             }));*/
+                             that.uploadMediaId(serverId,localIds);
+                         },
+                         fail: function(error){
+                             //alert(JSON.stringify(error));
+                             alert("图片上传失败，稍后重试")
+                         }
+                       }
+                     });
+             }
            }
         });
       },
