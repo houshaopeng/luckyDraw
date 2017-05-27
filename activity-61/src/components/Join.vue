@@ -62,8 +62,9 @@
                         localId: localIds[0], // 图片的localID
                         success: function (res) {
                             //that.imageUrl = res.localData; // localData是图片的base64数据，可以用img标签显示
+                            alert("下载陈宫")
                             var base64 = res.localData;
-                            this.$http.post("/game-app/file/uploadIosFile",{
+                            that.$http.post("/game-app/file/uploadIosFile",{
                                   "acitveName":"1",
                                   "fileType":"png",
                                   "file" : base64
