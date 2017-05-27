@@ -46,8 +46,6 @@
         //this.serverId = Vue.prototype.$getPhoto();
         //alert("123++++"+this.serverId);
 
-
-
         //alert("调用摄像头开始");
         var that = this;
         wx.chooseImage({

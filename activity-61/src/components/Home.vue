@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="loading_title">
+    <div class="loading_title" v-if="loadingText == '数据加载中...'">
       <p v-show='loadingImg'><img src="../assets/loading.gif" alt="" ><span>{{loadingText}}</span></p>
       <p><span v-show='!loadingImg'>{{loadingText}}</span></p>
     </div>
@@ -65,6 +65,7 @@ export default {
   methods:{
     // 无限加载
     loadMore() {
+
       var scroller = document.querySelector('.pictice_box');
       setTimeout(()=>{
         this.loading = true;
@@ -75,11 +76,13 @@ export default {
           this.initRegistrate();      
           this.loading = false;
           // console.log(this.currPageNum);
-          if(this.currPageNum==this.pages){
+
+          if(this.currPageNum>=this.pages){
             this.loadingText="数据加载完毕";
             this.loadingImg=false;
           }
         }else{
+          
           // console.log("loading  false")
           if(scroller[0] && scroller[0].scroller[0]) {
             let scrollTop = scroller[0].scrollHeight - scroller.height() - 20;
@@ -159,7 +162,7 @@ export default {
         "direction":false,
         "id":1,
         "pageNum":this.currPageNum,
-        "pageSize":"10",
+        "pageSize":"4",
         "sortName":"votes"
       }).then((res)=>{
         this.len=res.data.registrateDtoList.length;
@@ -169,6 +172,7 @@ export default {
           this.registrates.push(res.data.registrateDtoList[i])
         }
         // console.log(this.registrates.length);
+
         this.bannerScroll();
       })
     },
