@@ -172,7 +172,7 @@
                   //alert("chengong");
                   // todo
                   alert("微信公众号消息已发送至您的手机");
-
+                  alert(res.data.data.id);
                   location.hash = '/Canvassing/'+res.data.data.id;
 
                 } else {
