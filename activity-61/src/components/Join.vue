@@ -53,9 +53,11 @@
            success: function (res) {
                var localIds = res.localIds[0].toString(); //
                localIds = res.localIds;
-                  if(isIosSep){
+               alert(localIds);
+               alert(window.__wxjs_is_wkwebview );
+                  if(window.__wxjs_is_wkwebview ){
                     wx.getLocalImgData({
-                        localId: res.localIds[0], // 图片的localID
+                        localId: localIds[0], // 图片的localID
                         success: function (res) {
                             alert(res);
                             alert(JSON.stringify(res));
@@ -66,7 +68,6 @@
                     });
                   }else{
                      wx.uploadImage({
-
                          localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
                          isShowProgressTips: 1, // 默认为1，显示进度提示
                          success: function (res) {
