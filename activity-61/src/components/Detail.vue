@@ -1,5 +1,8 @@
 <template>
   <div class="detail">
+    <div class="back_home" @click="backHome">
+      
+    </div>
     <div class="serial">
       {{registrate.formatId}}号
     </div>
@@ -16,7 +19,7 @@
 
       </div>
       <router-link to="/Join">
-      <div class="detail_btn2"/>
+        <div class="detail_btn2"/>
       </router-link>
     </div>
 
@@ -33,9 +36,12 @@ export default {
     }
   },
   methods:{
-    back(){
+    /*back(){
       location.hash = '/join';
 
+    },*/
+    backHome(){
+       location.hash = '/home';
     },
     vote(){
       this.$http.post("/game-app/registrate/votes",{
@@ -69,7 +75,6 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang='scss'>
-@import "../../static/css/swiper.css";
   $font-size-base:75px;
   @function pxTorem($px) {
       @return $px / $font-size-base * 1rem;
@@ -81,6 +86,16 @@ export default {
     background-size: 100%;
     color: #ffffff;
     font-size: pxTorem(42px) ;
+    .back_home{
+      background:  url("../assets/back_home.png") no-repeat center;
+      height:pxTorem(40px) ;
+      width:pxTorem(158px) ;
+      background-size: 100%;
+      position: absolute;
+      right:  pxTorem(30px) ;
+      top: pxTorem(30px) ;
+      
+    }
     .serial{
       float: left;
       margin-top:  pxTorem(91px) ;

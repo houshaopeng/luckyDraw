@@ -1,6 +1,8 @@
 <template>
   <div class="canvassing">
-
+    <div class="back_home" @click="backHome">
+      
+    </div>
     <div class="number">
       您的编号为{{registrate.formatId}}号
     </div>
@@ -46,7 +48,6 @@ export default {
     backHome(){
       location.hash = 'Home';
     },
-
   },
   mounted:function(){
         this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
@@ -78,7 +79,16 @@ export default {
     padding-top: pxTorem(105px) ;
     font-size: pxTorem(42px) ;
     text-align: center;
-
+    .back_home{
+      background:  url("../assets/back_home.png") no-repeat center;
+      height:pxTorem(40px) ;
+      width:pxTorem(158px) ;
+      background-size: 100%;
+      position: absolute;
+      right:  pxTorem(30px) ;
+      top: pxTorem(30px) ;
+      
+    }
     .number{
       height:pxTorem(50px) ;
       width:pxTorem(750px) ;

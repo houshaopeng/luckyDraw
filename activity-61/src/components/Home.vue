@@ -1,5 +1,5 @@
 <template>
-  <div class="home" ref="homePage">
+  <div class="home" >
     <div class="topPage">
       <router-link to="/Join">
       <p  class="join_btn"></p>
@@ -7,18 +7,12 @@
       <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
-            <div class="swiper-slide ">
-              <div class="gift_box " v-for="item in prizes.slice(0,3)" >
+            <div class="swiper-slide  gift_box" v-for="item in prizes">
+             
                 <img :src="item.prizePicUrl" alt="">
                 <p>{{item.name}}</p>
-              </div>
+              
             </div>
-            <div class=" swiper-slide" >
-              <div class="gift_box" v-for="item in prizes.slice(3,6)" >
-                <img :src="item.prizePicUrl" alt="">
-                <p>{{item.name}}</p>
-              </div>
-            </div>    
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
@@ -27,7 +21,7 @@
     <div class="production">
     
     <div class="production_head">
-      <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
+      <input type="number" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
       <div class="search_btn"></div>
     </div>
     <div class="pictice_box" v-infinite-scroll="loadMore"  infinite-scroll-disabled="loading"  infinite-scroll-distance="10">
@@ -75,18 +69,18 @@ export default {
       setTimeout(()=>{
         this.loading = true;
         if(this.loading && this.currPageNum<this.pages){
-          console.log("loading  true")
+          // console.log("loading  true")
           this.currPageNum++;
-          console.log(this.currPageNum+"========"+this.pages);
+          // console.log(this.currPageNum+"========"+this.pages);
           this.initRegistrate();      
           this.loading = false;
-          console.log(this.currPageNum);
+          // console.log(this.currPageNum);
           if(this.currPageNum==this.pages){
             this.loadingText="数据加载完毕";
             this.loadingImg=false;
           }
         }else{
-          console.log("loading  false")
+          // console.log("loading  false")
           if(scroller[0] && scroller[0].scroller[0]) {
             let scrollTop = scroller[0].scrollHeight - scroller.height() - 20;
             scroller.scrollTop(scrollTop);
@@ -117,9 +111,15 @@ export default {
     // 轮播滚动
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
-        autoplay: 2000,//可选选项，自动滑
-        prevButton:'.swiper-button-prev',
-        nextButton:'.swiper-button-next',
+       pagination: '.swiper-pagination',
+       nextButton: '.swiper-button-next',
+       prevButton: '.swiper-button-prev',
+       slidesPerView: 3, //每组图片数
+       paginationClickable: true, //小点是否可点击
+       spaceBetween: 30,
+       autoplay:2000,
+       autoplayDisableOnInteraction : false,//触摸后清掉自动轮播，离开后恢复自动轮播
+       loop: true,
       })
     },
     /*规则查询*/
@@ -128,25 +128,33 @@ export default {
     },
     /*跳转到详情页*/
     getDetail(registrateId){
-      location.hash = '/Detail/'+registrateId;
+      location.hash = '/Detail/'+registrateId;  
     },
     findRegistrate(){
-        this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
-            if(res.data.code != '000000'){
-              alert(this.registrateId + "不存在")
-            } else {
-              location.hash='/Detail/'+this.registrateId;
-            }
-        })
+      var rule =/^[0-9]*$/;
+      if(rule.test(this.registrateId) && this.registrateId.length){
+          this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
+              if(res.data.code != '000000'){
+                alert(this.registrateId + "不存在")
+              } else {
+                location.hash='/Detail/'+this.registrateId;
+              }
+          })
+      }else{
+        alert("请输入正确的作品编号")
+      }
+    },
+    formatPhone(){
+
     },
     initPrize(){
       this.$http.post("/game-app/queryAllPrize").then((res)=>{
         this.prizes = res.data.data;
+        console.log(this.prizes)
       })
     },
     initRegistrate(){
-      // console.log(this.$refs.homePage.scrollTop)
-      // this.$refs.homePage.scrollTop=0;
+
       this.$http.post("/game-app/listRegistrate",{
         "direction":false,
         "id":1,
@@ -156,15 +164,24 @@ export default {
       }).then((res)=>{
         this.len=res.data.registrateDtoList.length;
         this.pages=res.data.pageInfo.pages;
-        console.log(this.pages)
+        // console.log(this.pages)
         for(var i =0;i<this.len;i++){
           this.registrates.push(res.data.registrateDtoList[i])
         }
-        console.log(this.registrates.length);
+        // console.log(this.registrates.length);
         this.bannerScroll();
       })
     },
-
+  },
+  watch:{
+    registrateId:function(){
+      if(this.registrateId.length>5){
+        return this.registrateId=this.registrateId.slice(0,5);
+      }else{
+        return  this.registrateId;
+      }
+      
+    }
   },
   created:function(){
     this.initRegistrate();
@@ -190,8 +207,8 @@ export default {
     height:pxTorem(100px) ;
     width:pxTorem(750px) ;
     background: #e1e1e1;
-    border-top:1px solid #c0c0c0;
-    border-bottom:1px solid #c0c0c0;
+    border-top:1px solid #adadad;
+    border-bottom:1px solid #adadad;
     box-sizing:border-box;
     text-align: center;
     position: relative;
@@ -230,7 +247,7 @@ export default {
         display: inline-block;
         width: pxTorem(250px) ;
         float: left;
-        height: 100%;
+        /*height: pxTorem(30px) ;*/
         img{
           width: pxTorem(230px) ;
           margin: 0 pxTorem(10px) pxTorem(10px);
@@ -238,9 +255,33 @@ export default {
         }
         p{
           margin-top:  pxTorem(-10px) ;
+          height: pxTorem(50px) ;
           color: #ffffff;
+          background: #f27f86;
+          font-size: pxTorem(24px) ;
         }
       }
+    }
+    .swiper-container {
+        width: pxTorem(750px) ;
+        height: pxTorem(205px) ;
+    }
+    .swiper-slide {
+        text-align: center;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
     }
   }
 

@@ -1,16 +1,17 @@
 <template>
   <div class="join">
+    <div class="back_home" @click="backHome">
+
+    </div>
     <span class="joinNum">{{metrix.totalRegistrates}}</span>
     <span class="tikNum">{{metrix.totalVotesTime}}</span>
     <span class="openNUm">{{metrix.totalPageViews}}</span>
-
-
 
     <div class="Photo" @click="getPhoto()" >
       <img :src="imageUrl"/>
     </div>
 
-    <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名">
+    <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名" maxlength="10">
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
     <button class="tijiao" @click="submitInfo"></button>
@@ -32,6 +33,9 @@
       }
     },
     methods:{
+      backHome(){
+         location.hash = '/home';
+      },
       setLength:function(num){
         if(this.telNum.length>=num){
           this.telNum = this.telNum.substring(0,num-1);
@@ -67,6 +71,8 @@
                         "userToken":window.$userToken,
                        }));*/
                        that.uploadMediaId(serverId,localIds);
+
+
                    },
                    fail: function(error){
                        //alert(JSON.stringify(error));
@@ -89,6 +95,7 @@
                     //alert("上传后台成功，可以渲染");
                     this.imageUrl=localId;//渲染上去
                     this.fileUrl=res.data.fileInfo.fileUrl;
+
                     //alert(this.fileUrl);
                 } else {
                   //alert("failed");
@@ -108,28 +115,46 @@
           "userToken":window.$userToken, // TODO
           "picUrl":this.fileUrl
         }))*/
-
-        this.$http.post("/game-app/registrate",{
-          "activeId":1,// TODO
-          "mobileNo":this.telNum,
-          "name":this.userName,
-          "userToken":window.$userToken, // TODO
-          "picUrl":this.fileUrl
-        }).then((res)=>{
-          if(res.data.code === '000000'){
-            //alert("chengong");
-            // todo
-            location.hash = '/Canvassing/'+res.data.data.id;
-          } else {
-            alert(res.data.message);
+        if(this.userName  && this.imageUrl){
+          var rule = /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\d{8}$/i;
+          if(this.telNum && rule.test(this.telNum)){
+              this.$http.post("/game-app/registrate",{
+                "activeId":1,// TODO
+                "mobileNo":this.telNum,
+                "name":this.userName,
+                "userToken":window.$userToken, // TODO
+                "picUrl":this.fileUrl
+              }).then((res)=>{
+                if(res.data.code === '000000'){
+                  //alert("chengong");
+                  // todo
+                  alert("请记住上传照片编号");
+                  setTimeout(()=>{
+                    location.hash = '/Canvassing/'+res.data.data.id;
+                  },1000)
+                } else {
+                  alert(res.data.message);
+                }
+              },(error)=>{
+                      //alert(JSON.stringify(error));
+              })
+          }else{
+            alert("手机号码填写不正确")
           }
-        },(error)=>{
-                //alert(JSON.stringify(error));
-          })
+        }else{
+          alert("请完善信息后再提交")
+        }
       }
-
-
       //TODO,在这里拿到全局的activityID,这个是唯一的。
+    },
+    watch:{
+      telNum:function(){
+        if(this.telNum.length>11){
+          return this.telNum=this.telNum.slice(0,11);
+        }else{
+          return  this.telNum;
+        }
+      }
     },
     mounted:function(){
       this.$http.post("/game-app/queryTotalTime").then((res)=>{
@@ -141,7 +166,11 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang='scss'>
+$font-size-base:75px;
+@function pxTorem($px) {
+    @return $px / $font-size-base * 1rem;
+}
 /* 最外层 */
 .join{
   width:100%;
@@ -150,7 +179,17 @@
   background-size:100%;
   position:relative;
   overflow: hidden;
-
+  
+}
+.back_home{
+  background:  url("../assets/back_home.png") no-repeat center;
+  height:pxTorem(40px) ;
+  width:pxTorem(158px) ;
+  background-size: 100%;
+  position: absolute;
+  right:  pxTorem(30px) ;
+  top: pxTorem(30px) ;
+  z-index: 10;
 }
 .join>span{
   width:1.87rem;
