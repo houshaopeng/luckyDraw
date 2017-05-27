@@ -64,6 +64,10 @@
                             alert((res.localData));
                             alert(JSON.stringify(res.localData));
                             that.imageUrl = res.localData; // localData是图片的base64数据，可以用img标签显示
+                        },
+                        fail: function(error){
+                          alert(error);
+                          alert(JSON.stringify(error));
                         }
                     });
                   }else{
