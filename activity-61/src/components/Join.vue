@@ -57,26 +57,26 @@
            success: function (res) {
                var localIds = res.localIds[0].toString(); //
                localIds = res.localIds;
-               alert(localIds);
-               alert(window.__wxjs_is_wkwebview );
+               //alert(localIds);
+               //alert(window.__wxjs_is_wkwebview );
                   if(window.__wxjs_is_wkwebview ){
-                    alert(wx.getLocalImgData);
-                    alert(JSON.stringify(wx.getLocalImgData));
+                    //alert(wx.getLocalImgData);
+                    //alert(JSON.stringify(wx.getLocalImgData));
                     wx.getLocalImgData({
                         localId: localIds[0], // 图片的localID
                         success: function (res) {
                             //that.imageUrl = res.localData; // localData是图片的base64数据，可以用img标签显示
-                            alert("下载陈宫")
+                            //alert("下载陈宫")
                             var base64 = res.localData;
                             that.$http.post("/game-app/file/uploadIosFile",{
                                   "acitveName":"1",
                                   "fileType":"png",
                                   "file" : base64
                                  }).then((res)=>{
-                                     alert("diaoyong");
+                                     //alert("diaoyong");
                                      //alert(JSON.stringify(res.data));
                                     if(res.data.code == '000000') {
-                                        alert("上传后台成功，可以渲染");
+                                        //alert("上传后台成功，可以渲染");
                                         /*this.imageUrl=localId;//渲染上去
                                         this.fileUrl=res.data.fileInfo.fileUrl;*/
                                         //alert(this.fileUrl);
@@ -84,11 +84,11 @@
                                         that.fileUrl=res.data.fileInfo.fileUrl;
 
                                     } else {
-                                      alert("服务器正忙,稍后重试");
+                                      alert(res.data.message);
 
                                     }
                                  },(error)=>{
-                                    alert(JSON.stringify(error));
+                                    //alert(JSON.stringify(error));
                                     alert("服务器正忙,稍后重试");
                                     //alert("上传后台失败,稍后重试");
                                     //alert(JSON.stringify(error));
@@ -171,7 +171,7 @@
                 if(res.data.code === '000000'){
                   //alert("chengong");
                   // todo
-                  alert("请记住上传照片编号");
+                  alert("微信公众号消息已发送至您的手机");
 
                   location.hash = '/Canvassing/'+res.data.data.id;
 
