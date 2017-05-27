@@ -81,6 +81,8 @@
                                         this.fileUrl=res.data.fileInfo.fileUrl;*/
                                         //alert(this.fileUrl);
                                         that.imageUrl = base64;
+                                        that.fileUrl=res.data.fileInfo.fileUrl;
+
                                     } else {
                                       alert("服务器正忙,稍后重试");
 
@@ -139,6 +141,7 @@
                     //alert(this.fileUrl);
                 } else {
                   //alert("failed");
+                  alert(res.data.message);
                 }
              },(error)=>{
                 alert("服务器正忙,稍后重试");
@@ -169,9 +172,9 @@
                   //alert("chengong");
                   // todo
                   alert("请记住上传照片编号");
-                  
+
                   location.hash = '/Canvassing/'+res.data.data.id;
-                 
+
                 } else {
                   alert(res.data.message);
                 }
@@ -219,7 +222,7 @@ $font-size-base:75px;
   background-size:100%;
   position:relative;
   overflow: hidden;
-  
+
 }
 .back_home{
   background:  url("../assets/back_home.png") no-repeat center;
