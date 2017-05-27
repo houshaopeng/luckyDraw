@@ -11,9 +11,9 @@
     <input type="text" name="" class="name" v-model="userName" placeholder="请输入姓名" maxlength="10">
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
-    <button class="tijiao" @click="submitInfo"></button>
+    <span class="tijiao" @click="submitInfo"></span>
     <router-link to="/home">
-    <button class="back_home" ></button>
+    <span class="back_home" ></span>
     </router-link>
     <button class="guize"></button>
   </div>
@@ -273,22 +273,19 @@ $font-size-base:75px;
   top:7.87rem;
   padding: 0  0.2rem;
 }
-.tijiao,.back_home{
-  width:3.13rem;
-  height:0.85rem;
+.join .tijiao , .back_home{
+  width:3.17rem;
+  height:0.95rem;
   position:absolute;
-  border:none;
   top:9.26rem;
-  
 }
 .tijiao{
-  background-image: url('../assets/join_tijiao.png');
+  background-image: url('../assets/join_tijiao.png') ;
+  background-repeat: no-repeat;
   background-size:100%;
   left: pxTorem(100px) ;
 }
 .back_home{
-  width:3.17rem;
-   height:0.95rem;
    background: url('../assets/canvassing2.png') no-repeat;
    background-size:100%;
    right: pxTorem(100px) ;

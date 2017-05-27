@@ -20,7 +20,7 @@ $font-size-base:75px;
     @return $px / $font-size-base * 1rem;
 }
 	.rule{
-		background:  url("http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/19ef401687774647a6c438f2e349b0d2rule_bg.jpg") no-repeat center;
+		background:  url("http://marketactivity.oss-cn-shanghai.aliyuncs.com/六一/201705/71b9554a5b5544189feb53e3dd52c751rule_bg.jpg") no-repeat center;
 		height:pxTorem(1334px);
 		width:pxTorem(750px) ;
 		background-size: 100%;

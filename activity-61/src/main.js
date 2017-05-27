@@ -47,9 +47,9 @@ console.log(window.$nickName+"---"+window.$userToken+"---"+window.$gameId+"---"+
 var pageShareData = function(){
   var a =  {
     'title':'最美宝宝评选啦',
-    'desc':'拉好友投票，提升名次，赢取奖品',
+    'desc':'六一儿童节家有萌宝投票评选大赛，一大波奖品等你来拿。',
     'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + window.$userToken +"&detailId="+window.$detailId + "&sourceUserToken="+ window.$sourceUserToken,
-    'imgUrl':"http://shanlingame.oneforce.cn/img/logo.jpg",
+    'imgUrl':"http://marketactivity.oss-cn-shanghai.aliyuncs.com/六一/201705/5baf0233061f4e9686e1028a53d0a86aH5share.jpg",
   }
   // alert(JSON.stringify(a));
   return a;

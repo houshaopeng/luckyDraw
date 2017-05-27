@@ -114,15 +114,15 @@ export default {
     // 轮播滚动
     bannerScroll(){
       var mySwiper = new Swiper('.swiper-container', {
-       pagination: '.swiper-pagination',
-       nextButton: '.swiper-button-next',
-       prevButton: '.swiper-button-prev',
-       slidesPerView: 3, //每组图片数
-       spaceBetween: 30,
-       autoplay:2000,
-       autoplayDisableOnInteraction : false,//触摸后清掉自动轮播，离开后恢复自动轮播
-       loop: true,
-       nested:true,//当切换到子swiper时停止父swiper的切换。请将子swiper的nested设置为true。
+      pagination: '.swiper-pagination',
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      slidesPerView: 3, //每组图片数
+      paginationClickable: true, //小点是否可点击
+      spaceBetween: 30,
+      autoplay:2000,
+      autoplayDisableOnInteraction : false,//触摸后清掉自动轮播，离开后恢复自动轮播
+      loop: true,
       })
     },
     /*规则查询*/
@@ -172,8 +172,8 @@ export default {
           this.registrates.push(res.data.registrateDtoList[i])
         }
         // console.log(this.registrates.length);
-
-        this.bannerScroll();
+           this.bannerScroll();
+       
       })
     },
   },
