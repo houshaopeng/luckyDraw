@@ -1,7 +1,7 @@
 <template>
   <div class="canvassing">
-    <div class="back_home" @click="backHome">
-      
+    <!-- <div class="back_home" @click="backHome"> -->
+
     </div>
     <div class="number">
       您的编号为{{registrate.formatId}}号
@@ -87,7 +87,7 @@ export default {
       position: absolute;
       right:  pxTorem(30px) ;
       top: pxTorem(30px) ;
-      
+
     }
     .number{
       height:pxTorem(50px) ;
