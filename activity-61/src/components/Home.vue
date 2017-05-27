@@ -61,7 +61,7 @@ export default {
        prizes :[],
        registrates: [],
        registrateId: "",
-       currPageNum:0,
+       currPageNum:1,
        len:"",
        pages:"",
        loadingText:"数据加载中...",
@@ -160,7 +160,7 @@ export default {
         for(var i =0;i<this.len;i++){
           this.registrates.push(res.data.registrateDtoList[i])
         }
-        console.log(this.registrates);
+        console.log(this.registrates.length);
         this.bannerScroll();
       })
     },
