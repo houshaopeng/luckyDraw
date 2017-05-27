@@ -79,8 +79,10 @@
                                         that.imageUrl = base64;
                                     } else {
                                       alert("服务器正忙,稍后重试");
+
                                     }
                                  },(error)=>{
+                                    alert(JSON.stringify(error));
                                     alert("服务器正忙,稍后重试");
                                     //alert("上传后台失败,稍后重试");
                                     //alert(JSON.stringify(error));
