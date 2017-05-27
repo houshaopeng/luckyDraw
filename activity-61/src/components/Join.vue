@@ -12,7 +12,9 @@
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
     <button class="tijiao" @click="submitInfo"></button>
+    <router-link to="/home">
     <button class="back_home" ></button>
+    </router-link>
     <button class="guize"></button>
   </div>
 </template>
