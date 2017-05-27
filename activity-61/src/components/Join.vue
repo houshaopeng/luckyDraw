@@ -68,10 +68,10 @@
                                   "fileType":"png",
                                   "file" : base64
                                  }).then((res)=>{
-                                     //alert("diaoyong");
+                                     alert("diaoyong");
                                      //alert(JSON.stringify(res.data));
                                     if(res.data.code == '000000') {
-                                        //alert("上传后台成功，可以渲染");
+                                        alert("上传后台成功，可以渲染");
                                         /*this.imageUrl=localId;//渲染上去
                                         this.fileUrl=res.data.fileInfo.fileUrl;*/
                                         //alert(this.fileUrl);
