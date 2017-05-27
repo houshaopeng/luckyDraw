@@ -84,7 +84,6 @@
                              //alert(JSON.stringify(error));
                              alert("图片上传失败，稍后重试")
                          }
-                       }
                      });
              }
            }
