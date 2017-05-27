@@ -56,6 +56,8 @@
                alert(localIds);
                alert(window.__wxjs_is_wkwebview );
                   if(window.__wxjs_is_wkwebview ){
+                    alert(wx.getLocalImgData);
+                    alert(JSON.stringify(wx.getLocalImgData));
                     wx.getLocalImgData({
                         localId: localIds[0], // 图片的localID
                         success: function (res) {
