@@ -1,8 +1,5 @@
 <template>
   <div class="join">
-    <div class="back_home" @click="backHome">
-
-    </div>
     <span class="joinNum">{{metrix.totalRegistrates}}</span>
     <span class="tikNum">{{metrix.totalVotesTime}}</span>
     <span class="openNUm">{{metrix.totalPageViews}}</span>
@@ -15,6 +12,7 @@
     <input type="number" name="" class="tel" v-model="telNum" placeholder="请输入手机号码"></input>
 
     <button class="tijiao" @click="submitInfo"></button>
+    <button class="back_home" ></button>
     <button class="guize"></button>
   </div>
 </template>
@@ -215,22 +213,13 @@ $font-size-base:75px;
 .join{
   width:100%;
   height:17.64rem;
-  background-image: url('../assets/join_bg.jpg');
+  background-image: url('http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/3177111107c34f0b9e2c7d66cf45b551join_bg.jpg');
   background-size:100%;
   position:relative;
   overflow: hidden;
 
 }
-.back_home{
-  background:  url("../assets/back_home.png") no-repeat center;
-  height:pxTorem(40px) ;
-  width:pxTorem(158px) ;
-  background-size: 100%;
-  position: absolute;
-  right:  pxTorem(30px) ;
-  top: pxTorem(30px) ;
-  z-index: 10;
-}
+
 .join>span{
   width:1.87rem;
   height:0.67rem;
@@ -282,17 +271,25 @@ $font-size-base:75px;
   top:7.87rem;
   padding: 0  0.2rem;
 }
-.tijiao{
+.tijiao,.back_home{
   width:3.13rem;
   height:0.85rem;
   position:absolute;
-  background-color:transparent;
-  background-image: url('../assets/join_tijiao.png');
-  background-size:100%;
   border:none;
   top:9.26rem;
-  left: 50%;
-  transform:translate(-50%,0);
+  
+}
+.tijiao{
+  background-image: url('../assets/join_tijiao.png');
+  background-size:100%;
+  left: pxTorem(100px) ;
+}
+.back_home{
+  width:3.17rem;
+   height:0.95rem;
+   background: url('../assets/canvassing2.png') no-repeat;
+   background-size:100%;
+   right: pxTorem(100px) ;
 }
 .guize{
   width:3.13rem;

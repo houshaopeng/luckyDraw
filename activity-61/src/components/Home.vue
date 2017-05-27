@@ -8,10 +8,12 @@
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
             <div class="swiper-slide  gift_box" v-for="item in prizes">
-             
                 <img :src="item.prizePicUrl" alt="">
-                <p>{{item.name}}</p>
-              
+                <div class="prize_tit">
+                  <p>{{item.name}}</p>
+                  <p>{{item.prizeName}}</p>
+                </div>
+                
             </div>
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
@@ -65,7 +67,6 @@ export default {
   methods:{
     // 无限加载
     loadMore() {
-
       var scroller = document.querySelector('.pictice_box');
       setTimeout(()=>{
         this.loading = true;
@@ -82,7 +83,6 @@ export default {
             this.loadingImg=false;
           }
         }else{
-          
           // console.log("loading  false")
           if(scroller[0] && scroller[0].scroller[0]) {
             let scrollTop = scroller[0].scrollHeight - scroller.height() - 20;
@@ -118,11 +118,11 @@ export default {
        nextButton: '.swiper-button-next',
        prevButton: '.swiper-button-prev',
        slidesPerView: 3, //每组图片数
-       paginationClickable: true, //小点是否可点击
        spaceBetween: 30,
        autoplay:2000,
        autoplayDisableOnInteraction : false,//触摸后清掉自动轮播，离开后恢复自动轮播
        loop: true,
+       nested:true,//当切换到子swiper时停止父swiper的切换。请将子swiper的nested设置为true。
       })
     },
     /*规则查询*/
@@ -228,7 +228,7 @@ export default {
    
   }
   .topPage{
-    background:  url("../assets/home_bg.jpg") no-repeat center;
+    background:  url("http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/118970d4ee4048eebef64a13f6af2efbhome_bg.jpg") no-repeat center;
     height:pxTorem(1323px) ;
     width:pxTorem(750px) ;
     background-size: 100%;
@@ -253,17 +253,23 @@ export default {
         float: left;
         /*height: pxTorem(30px) ;*/
         img{
-          width: pxTorem(230px) ;
+          width: pxTorem(240px) ;
           margin: 0 pxTorem(10px) pxTorem(10px);
-          height: pxTorem(160px) ;
+          height: pxTorem(140px) ;
         }
-        p{
-          margin-top:  pxTorem(-10px) ;
-          height: pxTorem(50px) ;
-          color: #ffffff;
-          background: #f27f86;
-          font-size: pxTorem(24px) ;
+         
+        .prize_tit{
+          margin-top: pxTorem(-20px) ;
+          
+          p{
+            line-height: pxTorem(30px) ;
+            color: #ffffff;
+            background: #f27f86;
+            font-size: pxTorem(24px) ;
+          }
         }
+       
+        
       }
     }
     .swiper-container {
@@ -272,7 +278,6 @@ export default {
     }
     .swiper-slide {
         text-align: center;
-        background: #fff;
         /* Center slide text vertically */
         display: -webkit-box;
         display: -ms-flexbox;
@@ -302,7 +307,7 @@ export default {
 
   .production{
     /*height:pxTorem(2069px) ;*/
-    background:  url("../assets/all_show-bg.jpg") no-repeat center;
+    /*background:  url("../assets/all_show-bg.jpg") no-repeat center;*/
     width:pxTorem(750px) ;
     background-size: 100% pxTorem(2069px);
     .production_head{
@@ -328,7 +333,7 @@ export default {
     .pictice_box{
       overflow: hidden;
       width: pxTorem(750px) ;
-      background:url("../assets/all_show_body.jpg") ;
+      background:url("http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/4bc98490be2949c489edd9b7a6b876e8all_show_body.jpg") ;
       background-size:100%; 
       background-repeat: repeat;
       margin-top: pxTorem(-2px);

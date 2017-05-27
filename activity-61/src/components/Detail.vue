@@ -87,14 +87,14 @@ export default {
     color: #ffffff;
     font-size: pxTorem(42px) ;
     .back_home{
-      background:  url("../assets/back_home.png") no-repeat center;
-      height:pxTorem(40px) ;
-      width:pxTorem(158px) ;
+      background:  url("../assets/canvassing2.png") no-repeat center;
+      height:pxTorem(60px) ;
+      width:pxTorem(240px) ;
       background-size: 100%;
       position: absolute;
-      right:  pxTorem(30px) ;
-      top: pxTorem(30px) ;
-      
+      left:50%;
+      margin-left:  pxTorem(-120px) ;
+      top: pxTorem(1230px) ;
     }
     .serial{
       float: left;
@@ -125,11 +125,11 @@ export default {
     }
     .btn_box{
       position: absolute;
-      left: 50%;
-      bottom: pxTorem(120px);
       height:pxTorem(160px) ;
       width:pxTorem(633px) ;
       margin-left: pxTorem(-316.5px);
+      left: 50%;
+      top: pxTorem(1050px);
     }
     .detail_btn1,.detail_btn2{
       background:  url("../assets/detail_2.png") no-repeat center;

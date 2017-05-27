@@ -71,7 +71,7 @@ export default {
       @return $px / $font-size-base * 1rem;
   }
   .canvassing{
-    background:  url("../assets/canvassing_bg.jpg") no-repeat center;
+    background:  url("//marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/a0842efc9bd14577bcbff00c193cd08ecanvassing_bg.jpg") no-repeat center;
     height:pxTorem(1218px) ;
     width:pxTorem(750px) ;
     background-size: 100%;
@@ -111,7 +111,7 @@ export default {
     .btn_box{
       position: absolute;
       left: 50%;
-      bottom: pxTorem(20px);
+      top: pxTorem(1050px);
       height:pxTorem(160px) ;
       width:pxTorem(633px) ;
       margin-left: pxTorem(-316.5px);
