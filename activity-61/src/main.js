@@ -10,7 +10,8 @@ Vue.config.productionTip = false
 // TODO laji daima
 
 import Swiper from "../static/js/swiper.js"
-
+import { InfiniteScroll } from 'mint-ui';
+Vue.use(InfiniteScroll);
 
 /*公共方法*/
 var GetRequest = function(key){

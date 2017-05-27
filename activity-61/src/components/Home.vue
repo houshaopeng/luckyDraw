@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" ref="homePage">
     <div class="topPage">
       <router-link to="/Join">
       <p  class="join_btn"></p>
@@ -18,33 +18,37 @@
                 <img :src="item.prizePicUrl" alt="">
                 <p>{{item.name}}</p>
               </div>
-            </div>
+            </div>    
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
-      </div>
+      </div> 
     </div>
     <div class="production">
+    
     <div class="production_head">
       <input type="text" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
-      <div class="search_btn" @click="findRegistrate" ></div>
+      <div class="search_btn"></div>
     </div>
-
-      <div class="pictice_box">
-        <div class="pictice" v-for="item in registrates">
-          <h3>{{item.formatId}}号</h3>
-          <div class="pic" @click="getDetail(item.id)">
-              <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
-          </div>
-          <div class="headPortrait">
-            <img :src="item.headUrl" />
-          </div>
-          <p class="name">{{item.name}}</p>
-          <p class="ticket">{{item.votes}}票</p>
-          <div class="vote_btn" @click="getDetail(item.id)">
-          </div>
+    <div class="pictice_box" v-infinite-scroll="loadMore"  infinite-scroll-disabled="loading"  infinite-scroll-distance="10">
+      <div class="pictice" v-for="item in registrates">
+        <h3>{{item.formatId}}号</h3>
+        <div class="pic" @click="getDetail(item.id)">
+            <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
+        </div>
+        <div class="headPortrait">
+          <img :src="item.headUrl" />
+        </div>
+        <p class="name">{{item.name}}</p>
+        <p class="ticket">{{item.votes}}票</p>
+        <div class="vote_btn" @click="getDetail(item.id)">
         </div>
       </div>
+    </div>
+    <div class="loading_title">
+      <p v-show='loadingImg'><img src="../assets/loading.gif" alt="" ><span>{{loadingText}}</span></p>
+      <p><span v-show='!loadingImg'>{{loadingText}}</span></p>
+    </div>
     </div>
   </div>
 </template>
@@ -57,10 +61,40 @@ export default {
        prizes :[],
        registrates: [],
        registrateId: "",
-
+       currPageNum:0,
+       len:"",
+       pages:"",
+       loadingText:"数据加载中...",
+       loadingImg:true,
     }
   },
   methods:{
+    // 无限加载
+    loadMore() {
+      var scroller = document.querySelector('.pictice_box');
+      setTimeout(()=>{
+        this.loading = true;
+        if(this.loading && this.currPageNum<this.pages){
+          console.log("loading  true")
+          this.currPageNum++;
+          console.log(this.currPageNum+"========"+this.pages);
+          this.initRegistrate();      
+          this.loading = false;
+          console.log(this.currPageNum);
+          if(this.currPageNum==this.pages){
+            this.loadingText="数据加载完毕";
+            this.loadingImg=false;
+          }
+        }else{
+          console.log("loading  false")
+          if(scroller[0] && scroller[0].scroller[0]) {
+            let scrollTop = scroller[0].scrollHeight - scroller.height() - 20;
+            scroller.scrollTop(scrollTop);
+            this.loading = true;
+          }
+        }
+      },100)  
+    },
 
     // picticeList(){
     //   this.$http.post(
@@ -99,7 +133,7 @@ export default {
     findRegistrate(){
         this.$http.post("/game-app/queryRegistrateDetail",{id:this.registrateId}).then(function(res){
             if(res.data.code != '000000'){
-              alert("该编号不存在")
+              alert(this.registrateId + "不存在")
             } else {
               location.hash='/Detail/'+this.registrateId;
             }
@@ -107,33 +141,38 @@ export default {
     },
     initPrize(){
       this.$http.post("/game-app/queryAllPrize").then((res)=>{
-
         this.prizes = res.data.data;
-        console.log(this.prizes);
       })
     },
     initRegistrate(){
+      // console.log(this.$refs.homePage.scrollTop)
+      // this.$refs.homePage.scrollTop=0;
       this.$http.post("/game-app/listRegistrate",{
         "direction":false,
         "id":1,
-        "pageNum":"1",
+        "pageNum":this.currPageNum,
         "pageSize":"10",
         "sortName":"votes"
       }).then((res)=>{
-        this.registrates = res.data.registrateDtoList;
+        this.len=res.data.registrateDtoList.length;
+        this.pages=res.data.pageInfo.pages;
+        console.log(this.pages)
+        for(var i =0;i<this.len;i++){
+          this.registrates.push(res.data.registrateDtoList[i])
+        }
+        console.log(this.registrates);
         this.bannerScroll();
       })
     },
 
   },
-
-  mounted:function(){
-
-    // this.queryActive();    //活动查询接口
-
-    // this.picticeList();
-    this.initPrize();
+  created:function(){
     this.initRegistrate();
+  },
+  mounted:function(){
+    this.loadMore();
+    this.initPrize();
+    
     window.getWxJsToken();
   }
 }
@@ -144,6 +183,28 @@ export default {
   $font-size-base:75px;
   @function pxTorem($px) {
       @return $px / $font-size-base * 1rem;
+  }
+  .loading_title{
+    font-size: pxTorem(32px) ;
+    line-height: pxTorem(100px) ;
+    height:pxTorem(100px) ;
+    width:pxTorem(750px) ;
+    background: #e1e1e1;
+    border-top:1px solid #c0c0c0;
+    border-bottom:1px solid #c0c0c0;
+    box-sizing:border-box;
+    text-align: center;
+    position: relative;
+    font-weight: bloder;
+    img{
+      width: pxTorem(40px) ;
+      height: pxTorem(40px) ;
+      position: absolute;
+      left:pxTorem(280px);
+      bottom: pxTorem(25px);
+      margin-left:  pxTorem(-40px);
+    }
+   
   }
   .topPage{
     background:  url("../assets/home_bg.jpg") no-repeat center;
@@ -196,8 +257,9 @@ export default {
 
   .production{
     /*height:pxTorem(2069px) ;*/
-
+    background:  url("../assets/all_show-bg.jpg") no-repeat center;
     width:pxTorem(750px) ;
+    background-size: 100% pxTorem(2069px);
     .production_head{
       background:  url("../assets/all_show_header.jpg") no-repeat center;
       height:pxTorem(256px) ;
@@ -209,22 +271,23 @@ export default {
         width: pxTorem(460px) ;
       }
       .search_btn{
-        height:pxTorem(100px) ;
-        width:pxTorem(100px) ;
+        height:pxTorem(50px) ;
+        width:pxTorem(60px) ;
         position: absolute;
         left: pxTorem(96px);
         bottom:pxTorem(-188px);
         z-index: 10;
       }
     }
-
+    
     .pictice_box{
+      overflow: hidden;
       width: pxTorem(750px) ;
       background:url("../assets/all_show_body.jpg") ;
-      background-size:100%;
+      background-size:100%; 
       background-repeat: repeat;
       margin-top: pxTorem(-2px);
-      height:pxTorem(2930px) ;
+      /*height:pxTorem(2930px) ;*/
       .pictice{
         float: left;
         width: pxTorem(336px);
@@ -245,14 +308,13 @@ export default {
           overflow: hidden;
           img{
             width: 100%;
-
+           
           }
         }
         .headPortrait{
           width: pxTorem(60px);
           float: left;
           height: pxTorem(60px);
-
           margin: pxTorem(-30px)  pxTorem(10px) 0 pxTorem(20px);
           border-radius: 50%;
           /* background: red  url("../assets/logo.png") no-repeat center; */
