@@ -75,11 +75,11 @@ export default {
   }
   .canvassing{
     background:  url("//marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/a0842efc9bd14577bcbff00c193cd08ecanvassing_bg.jpg") no-repeat center;
-    height:pxTorem(1263px) ;
+    height:pxTorem(1283px) ;
     width:pxTorem(750px) ;
     background-size: 100%;
     color: #ffffff;
-    padding-top: pxTorem(60px) ;
+    padding-top: pxTorem(40px) ;
     text-align: center;
     .back_home{
       background:  url("../assets/back_home.png") no-repeat center;
@@ -93,7 +93,6 @@ export default {
     .number{
       height:pxTorem(50px) ;
       width:pxTorem(750px) ;
-      margin-bottom: pxTorem(8px) ;
       h3{
         font-size: pxTorem(40px) ;
         margin-bottom:  pxTorem(10px) ;

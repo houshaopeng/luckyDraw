@@ -15,7 +15,7 @@
     <router-link to="/home">
     <span class="back_home" ></span>
     </router-link>
-    <button class="guize"></button>
+    <button class="guize" ></button>
   </div>
 </template>
 
