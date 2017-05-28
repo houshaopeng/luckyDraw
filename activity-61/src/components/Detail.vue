@@ -50,11 +50,12 @@ export default {
           "sourceUser":window.$sourceUserToken, // TODO
           "voteUser":window.$userToken, //TODO
       }).then((res)=>{
-          if(res.data.code == '100063'){
-            alert('当天超过投票次数,限制每天三次,同一个作品每天一次');
-          } else {
-            alert("投票成功，你已为你喜欢的萌宝投上了一票！");// TODO
-            this.registrate.votes++;// TODO
+          if(res.data.code=='000000'){
+            alert("投票成功，你已为你喜欢的萌宝投上了一票！");
+          }else if(res.data.code=='100063'){
+            alert("你今天的投票次数用完了，请明天再来投票吧！");
+          }else{
+            alert("你今天已经为该萌宝投过票！");
           }
       })
     }
