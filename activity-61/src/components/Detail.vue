@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <div class="back_home" @click="backHome">
-      
+
     </div>
     <div class="serial">
       {{registrate.formatId}}号
@@ -53,7 +53,7 @@ export default {
           if(res.data.code == '100063'){
             alert('当天超过投票次数,限制每天三次,同一个作品每天一次');
           } else {
-            alert("投票成功");// TODO
+            alert("投票成功，你已为你喜欢的萌宝投上了一票！");// TODO
             this.registrate.votes++;// TODO
           }
       })
