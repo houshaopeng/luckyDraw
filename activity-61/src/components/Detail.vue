@@ -52,6 +52,7 @@ export default {
       }).then((res)=>{
           if(res.data.code=='000000'){
             alert("投票成功，你已为你喜欢的萌宝投上了一票！");
+            this.registrate.votes++;
           }else if(res.data.code=='100063'){
             alert("你今天的投票次数用完了，请明天再来投票吧！");
           }else{
