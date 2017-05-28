@@ -4,8 +4,11 @@
 
     <!-- </div> -->
     <div class="number">
-      您的编号为{{registrate.formatId}}号
+      <h3>您的编号为{{registrate.formatId}}号</h3>
+      <p>温馨提示：为方便随时查看萌宝的投票</p>
+      <p>情况，请你谨记照片编号。</p>
     </div>
+    
     <div class="canvassing_pic">
          <img :src="image.picUrl" v-for="image in registrate.activeUserPicDtos"/>
 
@@ -72,12 +75,11 @@ export default {
   }
   .canvassing{
     background:  url("//marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/a0842efc9bd14577bcbff00c193cd08ecanvassing_bg.jpg") no-repeat center;
-    height:pxTorem(1218px) ;
+    height:pxTorem(1263px) ;
     width:pxTorem(750px) ;
     background-size: 100%;
     color: #ffffff;
-    padding-top: pxTorem(105px) ;
-    font-size: pxTorem(42px) ;
+    padding-top: pxTorem(60px) ;
     text-align: center;
     .back_home{
       background:  url("../assets/back_home.png") no-repeat center;
@@ -87,11 +89,18 @@ export default {
       position: absolute;
       right:  pxTorem(30px) ;
       top: pxTorem(30px) ;
-
     }
     .number{
       height:pxTorem(50px) ;
       width:pxTorem(750px) ;
+      margin-bottom: pxTorem(8px) ;
+      h3{
+        font-size: pxTorem(40px) ;
+        margin-bottom:  pxTorem(10px) ;
+      }
+      p{
+        font-size: pxTorem(28px) ;
+      }
     }
     .canvassing_pic{
       position: absolute;
