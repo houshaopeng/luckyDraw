@@ -13,15 +13,15 @@
                   <p>{{item.name}}</p>
                   <p>{{item.prizeName}}</p>
                 </div>
-                
+
             </div>
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
-      </div> 
+      </div>
     </div>
     <div class="production">
-    
+
     <div class="production_head">
       <input type="number" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
       <div class="search_btn"></div>
@@ -74,7 +74,7 @@ export default {
           // console.log("loading  true")
           this.currPageNum++;
           // console.log(this.currPageNum+"========"+this.pages);
-          this.initRegistrate();      
+          this.initRegistrate();
           this.loading = false;
           // console.log(this.currPageNum);
 
@@ -90,7 +90,7 @@ export default {
             this.loading = true;
           }
         }
-      },100)  
+      },100)
     },
 
     // picticeList(){
@@ -131,7 +131,7 @@ export default {
     },
     /*跳转到详情页*/
     getDetail(registrateId){
-      location.hash = '/Detail/'+registrateId;  
+      location.hash = '/Detail/'+registrateId;
     },
     findRegistrate(){
       var rule =/^[0-9]*$/;
@@ -173,7 +173,7 @@ export default {
         }
         // console.log(this.registrates.length);
            this.bannerScroll();
-       
+
       })
     },
   },
@@ -184,7 +184,7 @@ export default {
       }else{
         return  this.registrateId;
       }
-      
+
     }
   },
   created:function(){
@@ -193,7 +193,7 @@ export default {
   mounted:function(){
     this.loadMore();
     this.initPrize();
-    
+
     window.getWxJsToken();
   }
 }
@@ -225,7 +225,7 @@ export default {
       bottom: pxTorem(25px);
       margin-left:  pxTorem(-40px);
     }
-   
+
   }
   .topPage{
     background:  url("http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/118970d4ee4048eebef64a13f6af2efbhome_bg.jpg") no-repeat center;
@@ -257,10 +257,10 @@ export default {
           margin: 0 pxTorem(10px) pxTorem(10px);
           height: pxTorem(140px) ;
         }
-         
+
         .prize_tit{
           margin-top: pxTorem(-20px) ;
-          
+
           p{
             line-height: pxTorem(30px) ;
             color: #ffffff;
@@ -268,8 +268,8 @@ export default {
             font-size: pxTorem(24px) ;
           }
         }
-       
-        
+
+
       }
     }
     .swiper-container {
@@ -329,12 +329,12 @@ export default {
         z-index: 10;
       }
     }
-    
+
     .pictice_box{
       overflow: hidden;
       width: pxTorem(750px) ;
       background:url("http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/4bc98490be2949c489edd9b7a6b876e8all_show_body.jpg") ;
-      background-size:100%; 
+      background-size:100%;
       background-repeat: repeat;
       margin-top: pxTorem(-2px);
       /*height:pxTorem(2930px) ;*/
@@ -358,7 +358,7 @@ export default {
           overflow: hidden;
           img{
             width: 100%;
-           
+            height: 100%;
           }
         }
         .headPortrait{

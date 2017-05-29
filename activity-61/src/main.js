@@ -47,8 +47,8 @@ console.log(window.$nickName+"---"+window.$userToken+"---"+window.$gameId+"---"+
 var pageShareData = function(){
   var a =  {
     'title':'家有萌宝征集大赛',
-    'desc':'六一儿童节家有萌宝投票评选大赛，一大波奖品等你来拿。',
-    'link':"http://shanlingame.oneforce.cn/game-app/weiXin/index?gameId=1" + "&userToken=" + window.$userToken +"&detailId="+window.$detailId + "&sourceUserToken="+ window.$sourceUserToken,
+    'desc':'晒萌娃赢好礼，大家快来帮我家宝贝投一票吧！',
+    'link':"http://"+window.location.host+"/game-app/weiXin/index?gameId=1" + "&userToken=" + window.$userToken +"&detailId="+window.$detailId + "&sourceUserToken="+ window.$sourceUserToken,
     'imgUrl':"http://marketactivity.oss-cn-shanghai.aliyuncs.com/61/201705/5baf0233061f4e9686e1028a53d0a86aH5share.jpg",
   }
   // alert(JSON.stringify(a));
