@@ -112,6 +112,7 @@ var wxConfig = function (conf) {
       //分享给朋友圈
       wx.onMenuShareTimeline({
           title: pageShareData().title, // 分享标题
+          desc: pageShareData().desc, // 分享描述
           link: pageShareData().link, // 分享链接
           imgUrl: pageShareData().imgUrl, // 分享图标
           success: function () {
