@@ -162,7 +162,7 @@ export default {
         "direction":false,
         "id":1,
         "pageNum":this.currPageNum,
-        "pageSize":"4",
+        "pageSize":"10",
         "sortName":"votes"
       }).then((res)=>{
         this.len=res.data.registrateDtoList.length;
