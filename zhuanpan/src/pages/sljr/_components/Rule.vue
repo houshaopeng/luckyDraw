@@ -4,10 +4,8 @@
 		<p>1.绑定手机的账号才能领取奖品。</p>
 		<p>2.每位用户分享给好友，好友注册成功即可在抽奖一次。</p>
 		<p>3.每位用户每天抽奖次数上限为5次。</p>
-		<p>4.中奖之后奖品为iPhone或者kindle电子阅读器，客服会在中奖后</p>
-		<p>3个工作日内联系您。</p>
-		<p>5.虚拟商品有效期为15日，请尽快登录善林金融APP使用，超出时</p>
-		<p>间自动失效。</p>
+		<p>4.中奖之后奖品为iPhone或者kindle电子阅读器，客服会在中奖后3个工作日内联系您。</p>
+		<p>5.虚拟商品有效期为15日，请尽快登录善林金融APP使用，超出时间自动失效。</p>
 		<p>6.活动最终解释权归善林金融所有。</p>
 	</div>
 </template>
@@ -28,8 +26,8 @@ $font-size-base:75px;
 }
 	/*rule start*/
 	.activity_description {
-		width: pxTorem(710px);
-		padding: 0 pxTorem(20px);
+		width: pxTorem(690px);
+		padding: 0 pxTorem(30px);
 	    margin-top: pxTorem(30px);
 	    height: pxTorem(280px);
 	}
@@ -44,12 +42,14 @@ $font-size-base:75px;
 	    color: #fff;
 	    text-align: center;
 	    line-height: pxTorem(16px);
-	    font-size:pxTorem(16px);
+	    font-size:pxTorem(32px);
 	}
 
 	.activity_description p {
 	    color: #fff;
-	    font-size: pxTorem(16px);
+	    font-size: pxTorem(32px);
+	    margin-top: pxTorem(15px);
+	    line-height:pxTorem(40px);
 	}
 	/*rule end*/
 </style>	

@@ -17,9 +17,6 @@
 						<li><input type="number" placeholder="请输入验证码" id="otp" v-model = "VerificationCode"/></li>
 					</ul>
 				</div>
-				<!-- <span id="yz_error" v-show= "errorTitle">
-					* 验证码错误
-				</span> -->
 				<button id="sure" @click = "sureLogin"></button>
 		</div>
 	</div>
@@ -29,12 +26,10 @@ import { Toast } from 'mint-ui';
 import Bus from "VENDOR/js/bus.js"    
 	export default{
 		name: "Loginbox",
-		props:["childSwitchPage"],    // todo
 		data(){
 			return {
 				telPhone : "",  		// 用户手机号码
 				VerificationCode : "",  // 验证码
-				//errorTitle : false,      错误信息不提示显示
 				UUID: "",               // 从/login/sendLoginotp获取 uuid
 			}
 		},
@@ -43,23 +38,17 @@ import Bus from "VENDOR/js/bus.js"
 			getOtp(){
 				if(this.testTelPhone()){
 					this.$http.post(
-						"/api/login/sendLoginotp", 
+						"http://shanlingame.oneforce.cn/game-app/login/sendLoginotp", 
 						{
 							"mobileNo":this.telPhone,
 						},
-						{
-							headers: { 
-								"Content-Type": "application/json"
-							}
-						}
 					).then(function(response){
 						if(response.data.code == "000000"){
+							Toast('验证码已发送');
 							this.UUID = response.data.otpInfo.otpUUID;      //获取uuid
 						}else {
 							Toast("网络数据错误")
 						}
-					},function(response){
-						Toast("网络请求失败")
 					})
 				}
 			},
@@ -70,7 +59,7 @@ import Bus from "VENDOR/js/bus.js"
 				    Toast("请输入正确的手机号");
 				}else{
 					this.$http.post(
-						"http://yibingtao-test.shanlin.com:8083/login/checkOptverify", 
+						"http://shanlingame.oneforce.cn/game-app/login/checkOptverify", 
 						{
 							"mobileNo":this.telPhone,
 							"otp" : this.VerificationCode,
@@ -84,15 +73,13 @@ import Bus from "VENDOR/js/bus.js"
 					).then(function(response){
 						console.log(response);
 						if(response.data.code=="000000"){
-							Bus.$emit('moveTelPhone', this.telPhone);   
-							this.childSwitchPage.lotteryPage=true;
-							this.childSwitchPage.loginPage=false;
+							console.log(this.telPhone);
+							// Bus.$emit('moveTelPhone', this.telPhone); 
+							sessionStorage.setItem('userInfo', JSON.stringify({userName:this.telPhone}));
+							this.$router.push({ path: '/luckdraw' });
 						}else{
 							Toast('验证码错误');
-							// this.errorTitle = true;
 						}
-					},function(){
-						Toast('网络请求错误');
 					})
 				}	
 			},
@@ -219,9 +206,9 @@ $font-size-base:75px;
 	    height: pxTorem(56px);
 	    margin: 0 pxTorem(6px);
 	    font-size: pxTorem(16px);
-	    background-color: #bdbdbd;
+	    background-color: #20a0ff;
 	    color: #ffffff;
-	    border: pxTorem(1px) solid #bdbdbd;
+	    border: pxTorem(1px) solid #179bef;
 	    border-radius: pxTorem(3px);
 	    text-align: center;
 	}

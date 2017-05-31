@@ -1,14 +1,21 @@
+
+import turnTableLogin from 'PAGE/sljr/turnTable/Login.vue'
+import turnTableLuckdraw from 'PAGE/sljr/turnTable/LuckDraw.vue'
 export default[
-// 善林金融抽奖页面
+// 转盘抽奖页面
 {
-	path:'/sljractivite',
-	name:'sljractivite',
-	meta:{
-		title:'善林金融抽奖'
-	},
-	component:resolve=> require(['PAGE/sljr/SljrActivite.vue'],resolve)
+	path:'/login',
+	name:'login',
+	component: turnTableLogin,
 },
 {
-	path:'*', redirect:'/sljractivite'
+	path:'/luckdraw',
+	name:'luckdraw',
+	component: turnTableLuckdraw,
+},
+
+{
+	path:'*', redirect:'/login'
 },
 ]
+

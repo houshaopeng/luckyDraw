@@ -272,6 +272,9 @@
             });
         },
         mounted (){
+            console.log( window.location.href);
+            console.log( localStorage.usertoken);
+            console.log( window.location.href);
             localStorage.times=5;//当日抽奖次数
             if(localStorage.usertoken=='undefined'){
                 localStorage.usertoken = GetRequest('userToken');
@@ -281,11 +284,11 @@
             this.userName = localStorage.nickname;
             var __config = {
                 'RequestSignUrl':'http://120.27.220.25:8083/weiXin/getSign',
-                'RequestSignParam':{                   //验证签名接口的参数
+                'RequestSignParam':JSON.stringify({                   //验证签名接口的参数
                     'shareUrl': window.location.href,
                     'userToken':localStorage.usertoken,
                     'gameId': localStorage.gameId,
-                },
+                }),
                 'onShareSuccess':function(channel){
                     var type = 0;
                     if(!channel){

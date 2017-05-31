@@ -6,15 +6,11 @@ module.exports = {
 	port: 8080,
 	assetsSubDirectory: 'static',
 	assetsPublicPath: '/',
-	proxyTable: {
-		"/api": {
-			// target: 'http://yibingtao-test.shanlin.com:8083',   //代理一下路径目标指向：
-			target:'http://120.27.220.25:8083',
-			// host: '10.1.',
-			// logLevel: 'debug',
+	proxyTable: {            // TODO
+		"/game-app": {
+			target:'http://shanlingame.oneforce.cn',
 			changeOrigin: true,
-			// pathRewrite:'/^api'
-			pathRewrite: {'^/api' : ''},
+			pathRewrite: {'^/game-app' : '/'},
 		},
 	},
 	// CSS Sourcemaps off by default because relative paths are "buggy"
