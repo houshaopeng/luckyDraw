@@ -215,7 +215,7 @@ $font-size-base:75px;
 .join{
   width:100%;
   height:17.64rem;
-  background-image: url('http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/3177111107c34f0b9e2c7d66cf45b551join_bg.jpg');
+  background-image: url('http://marketactivity.oss-cn-shanghai.aliyuncs.com/%E5%85%AD%E4%B8%80/201705/b5fd2c69859e42a28d2a338168c276fcjoin_bg.jpg');
   background-size:100%;
   position:relative;
   overflow: hidden;
