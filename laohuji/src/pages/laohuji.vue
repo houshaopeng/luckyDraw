@@ -141,15 +141,30 @@
 
                         }else if((num1==-108||num1==-372||num1==-636)&&(num2==-108||num2==-372||num2==-636)&&(num3==-108||num3==-372||num3==-636)){
                             this.drawn=true;
-                            alert("三个西瓜5000");
 
-
+                            var getTime = getNowFormatDate();//抽奖时间
+                            var goods=this.drawntext.a+"元理财金";
+                            if (!localStorage.prize) {
+                                localStorage.prize = JSON.stringify([[getTime, goods]]);
+                            } else {
+                                var arrNew = JSON.parse(localStorage.prize);
+                                arrNew.push([getTime, goods]);
+                                localStorage.prize = JSON.stringify(arrNew);
+                            }
 
 
                         }else if((num1==-196||num1==-460||num1==-724)&&(num2==-196||num2==-460||num2==-724)&&(num3==-196||num3==-460||num3==-724)){
                             this.drawn=true;
-                            alert("三个金币10000");
 
+                           var getTime = getNowFormatDate();//抽奖时间
+                            var goods=this.drawntext.a+"元理财金";
+                            if (!localStorage.prize) {
+                                localStorage.prize = JSON.stringify([[getTime, goods]]);
+                            } else {
+                                var arrNew = JSON.parse(localStorage.prize);
+                                arrNew.push([getTime, goods]);
+                                localStorage.prize = JSON.stringify(arrNew);
+                            }
 
 
                         }else{
