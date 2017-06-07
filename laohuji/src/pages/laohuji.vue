@@ -181,8 +181,7 @@
             },
             gozjjl(){
                 if(localStorage.usertoken){
-                    this.jilu=true;
-                    this.laohujishow=false;
+                    window.location.hash="/login"
                 }else{
                     alert("您还没有中奖记录,请登录")
                 }
