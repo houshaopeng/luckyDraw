@@ -218,7 +218,7 @@
     }
     #laohujipage{
       width: 100%;
-      height: 100vh;
+      height: 736px;
       background: url("../assets/beijing.png")no-repeat center center;
       background-size:cover;
       color:#fff;
