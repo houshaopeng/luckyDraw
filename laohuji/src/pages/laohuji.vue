@@ -71,6 +71,8 @@
       },
       methods:{
         caonima(){
+              if(!this.flag){
+              this.flag=true;
                 localStorage.times--;
                 this.times=localStorage.times;
                 if(localStorage.times<0){
@@ -115,8 +117,7 @@
                     $(".images img").css({"top":-20});
                 }
                 /*=================================================*/
-                if(!this.flag){
-                    this.flag=true;
+
                     reset();
                     letGo();
                     setTimeout(()=>{
@@ -170,8 +171,8 @@
                         }else{
                             this.notwinning=true;
                         }
-                        this.flag=false;
                          this.items=JSON.parse(localStorage.prize);
+                         this.flag=false;
                     },4500);
                  }
                 }
