@@ -55,6 +55,8 @@ export default {
             this.registrate.votes++;
           }else if(res.data.code=='100063'){
             alert("你今天的投票次数用完了，请明天再来投票吧！");
+          }else if(res.data.code=='100083'){
+            alert(res.data.message);
           }else{
             alert("你今天已经为该萌宝投过票！");
           }
