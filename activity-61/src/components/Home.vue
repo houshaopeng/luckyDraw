@@ -92,7 +92,7 @@ export default {
         }
       },100)
     },
-
+//我的分支可以随便改
     // picticeList(){
     //   this.$http.post(
     //     // "http://shanlingame.oneforce.cn/game-app/registrate",
