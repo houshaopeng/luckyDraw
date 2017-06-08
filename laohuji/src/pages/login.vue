@@ -19,7 +19,7 @@
         <!-- 中奖记录页 -->
         <div id="jilubox" v-show="jilubox">
             <ul>
-                <li v-for="item in items"><span>2017.06.06</span><span class="money">20000元理财金</span></li>
+                <li v-for="item in items"><span class="zjtime">{{item[0]}}</span><span class="money">{{item[1]}}</span></li>
 
             </ul>
             <div class="more"@click="more">查看更多记录</div>
@@ -158,6 +158,7 @@ export default{
     },
     mounted:function(){
         this.items=JSON.parse(localStorage.prize);
+        console.log(this.items);
     }
 }
 </script>
@@ -272,13 +273,16 @@ export default{
     }
     #jilubox ul{
         position: absolute;
-        padding:70px 30px 0;
+        padding:70px 5px 0;
     }
     #jilubox ul li{
         padding:5px 0;
     }
+    .zjtime{
+        font-size:14px;
+    }
     .money{
-        margin-left:50px;
+        margin-left:25px;
     }
     .more{
         text-align: center;
