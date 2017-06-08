@@ -1,5 +1,7 @@
 <template>
   <div class="home" >
+  <!-- 头部轮播文字 -->
+    <marquee direction="left">感谢您关注善林金融六一儿童节“家有萌宝”活动，目前活动已结束停止投票，即将诞生十强人气萌宝，最终获奖名单将于6月9日在“善林金融”公众号公布，敬请关注。谢谢您的支持！</marquee>
     <div class="topPage">
       <router-link to="/Join">
       <p  class="join_btn"></p>
@@ -92,7 +94,7 @@ export default {
         }
       },100)
     },
-//我的分支可以随便改
+
     // picticeList(){
     //   this.$http.post(
     //     // "http://shanlingame.oneforce.cn/game-app/registrate",
@@ -204,6 +206,18 @@ export default {
   $font-size-base:75px;
   @function pxTorem($px) {
       @return $px / $font-size-base * 1rem;
+  }
+  /* 顶部轮播 */
+  marquee{
+      color:white;
+      background:rgba(0,0,0,0.3);
+      height:pxTorem(80px);
+      line-height:pxTorem(80px);
+      width:100%;
+      position:fixed;
+      top:0;
+      font-size: pxTorem(32px);
+      z-index:21;
   }
   .loading_title{
     font-size: pxTorem(32px) ;
