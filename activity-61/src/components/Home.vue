@@ -3,9 +3,7 @@
   <!-- 头部轮播文字 -->
     <marquee direction="left">感谢您关注善林金融六一儿童节“家有萌宝”活动，目前活动结束已停止投票，十强人气萌宝已经诞生啦，获奖名单将于6月9日在“善林金融”公众号公布，敬请关注。谢谢您的支持！</marquee>
     <div class="topPage">
-
       <p  class="join_btn"></p>
-
       <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
@@ -20,9 +18,7 @@
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
       </div>
-
     </div>
-
     <div class="list">
       <p class="title">
         <img src="../assets/person_air.jpg" alt="">
@@ -30,9 +26,6 @@
       <div class="swiper-container person">
           <div class="swiper-wrapper">
             <div class="swiper-slide  " v-for="(item, index) in registrates_word">
-
-
-
               <div class="pictice2" >
                 <h3>第{{index+1}}名</h3>
                 <div class="pic">
@@ -43,13 +36,8 @@
                 </div>
                 <p class="name">{{item.name}} <span>{{item.formatId}}号</span></p>
                 <p class="ticket">{{item.votes}}票</p>
-
               </div>
-
-
-
             </div>
-
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
