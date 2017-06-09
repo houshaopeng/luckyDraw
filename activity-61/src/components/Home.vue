@@ -1,11 +1,11 @@
 <template>
   <div class="home" >
   <!-- 头部轮播文字 -->
-    <marquee direction="left">感谢您关注善林金融六一儿童节“家有萌宝”活动，目前活动已结束停止投票，即将诞生十强人气萌宝，最终获奖名单将于6月9日在“善林金融”公众号公布，敬请关注。谢谢您的支持！</marquee>
+    <marquee direction="left">感谢您关注善林金融六一儿童节“家有萌宝”活动，目前活动结束已停止投票，十强人气萌宝已经诞生啦，获奖名单将于6月9日在“善林金融”公众号公布，敬请关注。谢谢您的支持！</marquee>
     <div class="topPage">
-      <router-link to="/Join">
+
       <p  class="join_btn"></p>
-      </router-link>
+
       <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
@@ -15,38 +15,73 @@
                   <p>{{item.name}}</p>
                   <p>{{item.prizeName}}</p>
                 </div>
-
             </div>
           </div>
           <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
       </div>
+
     </div>
+
+    <div class="list">
+      <p class="title">
+        <img src="../assets/person_air.jpg" alt="">
+      </p>
+      <div class="swiper-container person">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide  " v-for="(item, index) in registrates_word">
+
+
+
+              <div class="pictice2" >
+                <h3>第{{index+1}}名</h3>
+                <div class="pic">
+                    <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
+                </div>
+                <div class="headPortrait">
+                  <img :src="item.headUrl" />
+                </div>
+                <p class="name">{{item.name}} <span>{{item.formatId}}号</span></p>
+                <p class="ticket">{{item.votes}}票</p>
+
+              </div>
+
+
+
+            </div>
+
+          </div>
+          <div class="swiper-button-prev swiper-button-white"></div>
+          <div class="swiper-button-next swiper-button-white"></div>
+      </div>
+
+    </div>
+
     <div class="production">
 
-    <div class="production_head">
-      <input type="number" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
-      <div class="search_btn"></div>
-    </div>
-    <div class="pictice_box" v-infinite-scroll="loadMore"  infinite-scroll-disabled="loading"  infinite-scroll-distance="10">
-      <div class="pictice" v-for="item in registrates">
-        <h3>{{item.formatId}}号</h3>
-        <div class="pic" @click="getDetail(item.id)">
-            <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
-        </div>
-        <div class="headPortrait">
-          <img :src="item.headUrl" />
-        </div>
-        <p class="name">{{item.name}}</p>
-        <p class="ticket">{{item.votes}}票</p>
-        <div class="vote_btn" @click="getDetail(item.id)">
+      <div class="production_head">
+        <input type="number" class="search" placeholder="请输入编号" @blur="findRegistrate" v-model="registrateId">
+        <div class="search_btn"></div>
+      </div>
+      <div class="pictice_box" v-infinite-scroll="loadMore"  infinite-scroll-disabled="loading"  infinite-scroll-distance="10">
+        <div class="pictice" v-for="item in registrates">
+          <h3>{{item.formatId}}号</h3>
+          <div class="pic" @click="getDetail(item.id)">
+              <img :src="image.picUrl" v-for="image in item.activeUserPicDtos"/>
+          </div>
+          <div class="headPortrait">
+            <img :src="item.headUrl" />
+          </div>
+          <p class="name">{{item.name}}</p>
+          <p class="ticket">{{item.votes}}票</p>
+          <div class="vote_btn" @click="getDetail(item.id)">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="loading_title" v-if="loadingText == '数据加载中...'">
-      <p v-show='loadingImg'><img src="../assets/loading.gif" alt="" ><span>{{loadingText}}</span></p>
-      <p><span v-show='!loadingImg'>{{loadingText}}</span></p>
-    </div>
+      <div class="loading_title" v-if="loadingText == '数据加载中...'">
+        <p v-show='loadingImg'><img src="../assets/loading.gif" alt="" ><span>{{loadingText}}</span></p>
+        <p><span v-show='!loadingImg'>{{loadingText}}</span></p>
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +93,7 @@ export default {
     return {
        prizes :[],
        registrates: [],
+       registrates_word:[],
        registrateId: "",
        currPageNum:1,
        len:"",
@@ -115,7 +151,7 @@ export default {
     // },
     // 轮播滚动
     bannerScroll(){
-      var mySwiper = new Swiper('.swiper-container', {
+      var mySwiper = new Swiper('.banner', {
       pagination: '.swiper-pagination',
       nextButton: '.swiper-button-next',
       prevButton: '.swiper-button-prev',
@@ -125,7 +161,19 @@ export default {
       autoplay:2000,
       autoplayDisableOnInteraction : false,//触摸后清掉自动轮播，离开后恢复自动轮播
       loop: true,
+      });
+      var mySwiper2 = new Swiper('.person', {
+      pagination: '.swiper-pagination',
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      slidesPerView: 2, //每组图片数
+      paginationClickable: true, //小点是否可点击
+      spaceBetween: 30,
+      autoplay:2000,
+      autoplayDisableOnInteraction : false,//触摸后清掉自动轮播，离开后恢复自动轮播
+      loop: true,
       })
+
     },
     /*规则查询*/
     getRule(){
@@ -172,6 +220,9 @@ export default {
         // console.log(this.pages)
         for(var i =0;i<this.len;i++){
           this.registrates.push(res.data.registrateDtoList[i])
+        }
+        for(var j = 0;j<10;j++){
+          this.registrates_word.push(this.registrates[j]);
         }
         // console.log(this.registrates.length);
            this.bannerScroll();
@@ -307,16 +358,125 @@ export default {
         align-items: center;
     }
   }
-
   .topPage .join_btn{
-    background:  url("../assets/join_btn.png") no-repeat center;
-    height:pxTorem(79px) ;
-    width:pxTorem(302px) ;
-    background-size: 100%;
+    background:  url("../assets/person_air.jpg") no-repeat center;
+    height:pxTorem(50px) ;
+    width:pxTorem(300px) ;
+    background-size: 100% 100%;
     position: absolute;
     top: pxTorem(850px) ;
     left:50%;
-    margin-left: pxTorem(-151px) ;
+    margin-left: pxTorem(-150px) ;
+
+  }
+
+  .list{
+    width: pxTorem(750px);
+    height: pxTorem(750px);
+    background-color: #f2808c;
+    position:relative;
+    .title{
+      position:absolute;
+      width :pxTorem(300px);
+      height :pxTorem(50px);
+      background:red;
+      top:pxTorem(50px);
+      left:50%;
+      -webkit-transform: translate(-50%,0);
+         -moz-transform: translate(-50%,0);
+          -ms-transform: translate(-50%,0);
+           -o-transform: translate(-50%,0);
+              transform: translate(-50%,0);
+      img{
+        width:100%;
+        height:100%;
+      }
+    }
+    .person{
+      position:absolute;
+      width:pxTorem(750px);
+      height:pxTorem(600px);
+      top:pxTorem(150px);
+      .swiper-slide {
+          text-align: center;
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          .pictice2{
+            width:100%;
+            height:100%;
+            background:  url("../assets/pictice.png") no-repeat center;
+            background-size: 100%;
+            text-align: center;
+            position:relative;
+            h3{
+              margin-top: pxTorem(20px);
+              font-weight: bloder;
+              color: #ffffff;
+            }
+            .pic{
+              margin: pxTorem(45px) auto;
+              width: pxTorem(308px);
+              height: pxTorem(340px);
+              overflow: hidden;
+              img{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .headPortrait{
+              width: pxTorem(60px);
+              float: left;
+              height: pxTorem(60px);
+              margin: pxTorem(-30px)  pxTorem(10px) 0 pxTorem(20px);
+              border-radius: 50%;
+              /* background: red  url("../assets/logo.png") no-repeat center; */
+              background-size: 100%;
+              overflow:hidden;
+            }
+            .headPortrait img{
+              width:100%;
+              height:100%;
+            }
+            .name{
+              text-align: left;
+              color: #828282;
+              line-height:  pxTorem(60px);
+              margin-top:  pxTorem(-17px);
+              padding-left:  pxTorem(50px);
+              position:relative;
+              span{
+                position:absolute;
+                top:50%;
+                -webkit-transform: translate(0,-50%);
+                   -moz-transform: translate(0,-50%);
+                    -ms-transform: translate(0,-50%);
+                     -o-transform: translate(0,-50%);
+                        transform: translate(0,-50%);
+                right: pxTorem(20px);
+              }
+            }
+            .ticket{
+              display:inline-block;
+              text-align: center;
+              color: #007fd0;
+              padding-top:pxTorem(15px);
+            }
+          }
+      }
+
+    }
+
   }
 
   .production{
@@ -324,6 +484,7 @@ export default {
     /*background:  url("../assets/all_show-bg.jpg") no-repeat center;*/
     width:pxTorem(750px) ;
     background-size: 100% pxTorem(2069px);
+
     .production_head{
       background:  url("../assets/all_show_header.jpg") no-repeat center;
       height:pxTorem(256px) ;
