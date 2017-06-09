@@ -404,18 +404,18 @@ export default {
             width:100%;
             height:100%;
             background:  url("../assets/pictice.png") no-repeat center;
-            background-size: 100%;
+            background-size: 100% 100%;
             text-align: center;
             position:relative;
             h3{
-              margin-top: pxTorem(20px);
+              margin-top: pxTorem(15px);
               font-weight: bloder;
               color: #ffffff;
             }
             .pic{
               margin: pxTorem(45px) auto;
-              width: pxTorem(308px);
-              height: pxTorem(340px);
+              width: pxTorem(320px);
+              height: pxTorem(360px);
               overflow: hidden;
               img{
                 width: 100%;
@@ -455,10 +455,9 @@ export default {
               }
             }
             .ticket{
-              display:inline-block;
               text-align: center;
               color: #007fd0;
-              padding-top:pxTorem(15px);
+              margin-top:pxTorem(15px);
             }
           }
       }
