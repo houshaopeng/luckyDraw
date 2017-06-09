@@ -3,7 +3,7 @@
   <!-- 头部轮播文字 -->
     <marquee direction="left">感谢您关注善林金融六一儿童节“家有萌宝”活动，目前活动结束已停止投票，十强人气萌宝已经诞生啦，获奖名单将于6月9日在“善林金融”公众号公布，敬请关注。谢谢您的支持！</marquee>
     <div class="topPage">
-      <p  class="join_btn"></p>
+      <!-- <p  class="join_btn"></p> -->
       <p class="rule_btn" @click="getRule"></p>
       <div class="swiper-container banner">
           <div class="swiper-wrapper">
@@ -195,7 +195,6 @@ export default {
       })
     },
     initRegistrate(){
-
       this.$http.post("/game-app/listRegistrate",{
         "direction":false,
         "id":1,
@@ -212,6 +211,7 @@ export default {
         for(var j = 0;j<10;j++){
           this.registrates_word.push(this.registrates[j]);
         }
+        this.registrates_word.length=10;
         // console.log(this.registrates.length);
            this.bannerScroll();
 
